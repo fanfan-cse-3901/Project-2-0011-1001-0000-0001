@@ -2,10 +2,10 @@
 ### Game of Set
 
 ### Roles
-* Overall Project Manager:
-* Coding Manager:
-* Testing Manager:
-* Documentation:
+* Overall Project Manager: Amanda Cheng
+* Coding Manager: Yifan Yao
+* Testing Manager: Prachiti Garge
+* Documentation: Troy Stein
 
 ### Contributions
 Please list who did what for each part of the project.
