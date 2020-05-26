@@ -31,16 +31,6 @@ class Player
   public :initialize, :win_pts, :lose_pts, :current_pts
 end
 
-# Created 05/26/2020 by Yifan Yao
-def create_array(num_players, person_arr)
-  i = 1
-  while i <= num_players
-    person_arr[i - 1] = Player.new(i)
-    i += 1
-  end
-  person_arr
-end
-
 # Created 05/25/2020 by Amanda Cheng
 # Edited 05/26/2020 by Yifan Yao: refactor codes, remove global variables by steps
 def player_input(num_players)
@@ -54,7 +44,6 @@ def player_input(num_players)
 
   # continue playing for the round until end game
   while continue_game && (i < 5) # i < 5 is to terminate game at some point for debugging purposes
-
     print 'Input number of player who yells SET first: '
     num = gets.to_i
     # Check if player inputted valid number
@@ -100,7 +89,6 @@ def player_input(num_players)
       $Table.delete_at(c2)
       $Table.delete_at(c3)
       # call set_table method from Prachiti to replace cards --YET TO BE WRITTEN
-      #
       # output that it is a set and update score
       puts 'It is a set!'
 
@@ -120,13 +108,4 @@ def player_input(num_players)
   end
 end
 
-# Created 05/25/2020 by Amanda Cheng
-# Edited 05/26/2020 by Yifan Yao: refactor codes, remove global variables by steps
-# Initialize array of players. Assume at least 2 players.
-num_players = -1
-while num_players <= 2
-  print 'Enter number of players (at least two players): '
-  num_players = gets.to_i
-end
 
-player_input(num_players)
