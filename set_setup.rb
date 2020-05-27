@@ -26,8 +26,7 @@ color_A=[1,2,3]#["red","green","purple"]
 shade_A=[1,2,3]#["solid","striped","open"]
 shape_A=[1,2,3]#["diamond","squiggle","oval"]
 cards = Array.new #temporary pointer
-m+=1
-#populates the hashmap
+#populates the array
 #num array
 while j <num_A.length
   #color array
