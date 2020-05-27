@@ -15,7 +15,7 @@ module SetVerify
   # selections - array of 3 cards to be matched.
   #
   # Returns true if set, otherwise false.
-  def is_set_loop(selections)
+  def SetVerify.is_set_loop(selections)
     # TODO: Improve & Fix
     return false if selections.empty?
 
@@ -47,7 +47,7 @@ module SetVerify
   # selections - array of cards to be matched.
   #
   # Returns true if set, otherwise false.
-  def is_set(selections)
+  def SetVerify.is_set(selections)
     return false if selections.empty?
 
     set_indeed = false  # Cards are indeed a set.
