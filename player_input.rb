@@ -90,9 +90,9 @@ def player_input(num_players, person_arr)
       person_arr[num - 1].win_pts
       puts "Player #{num}'s Score: #{person_arr[num - 1].current_pts}" # Outputs the player's score
       # If is set, remove from table array
-      $table.delete_at(card[0])
-      $table.delete_at(card[1])
-      $table.delete_at(card[2])
+      puts $table.delete_at(card[0]-1)
+      puts $table.delete_at(card[1]-1)
+      puts $table.delete_at(card[2]-1)
       # Call set_table method from Prachiti to replace cards --YET TO BE WRITTEN
       TableSetting.set_table($table, $dealer)
 
