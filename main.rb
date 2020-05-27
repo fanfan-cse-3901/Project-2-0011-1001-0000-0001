@@ -30,6 +30,21 @@ def display_sorted_score(num_players, person_arr)
   end
 end
 
+# Created 05/25/2020 by Amanda Cheng
+# Initialize array of players. Assume at least 2
+def pre_game_selection
+  print 'Enter number of players (at least 2): '
+  num_players = gets.chomp.to_i
+  while num_players < 2
+    print 'Invalid number, try again: '
+    num_players = gets.chomp.to_i
+  end
+  person_arr = []
+  create_array(num_players, person_arr)
+
+  display_sorted_score(num_players, person_arr)
+end
+
 # Created 05/26/2020 by Yifan Yao
 def post_game_selection
   sel = -1
