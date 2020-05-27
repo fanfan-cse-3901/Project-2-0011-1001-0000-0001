@@ -1,18 +1,20 @@
 # frozen_string_literal: true
 
-# File created 05/25/20 by Kevin Dong
+# File created 05/25/2020 by Kevin Dong
 
-# Module for check
+# Public: Methods for verifying if 3 cards are able to form a set.
+# is_set methods should have array of 3 integers passed in.
 module SetVerify
-
+  # Public: Dummy method.
+  # Outputs "is set".
   def set?
     'is set'
   end
 
-  # Created 05/26/20 by Kevin Dong
+  # Created 05/26/2020 by Kevin Dong
   # Public: Verifies if incoming cards is a set. (Looped solution)
   #
-  # selections - array of 3 cards to be matched.
+  # selections - array of 3 cards numbers (integers) to be matched.
   #
   # Returns true if set, otherwise false.
   def SetVerify.is_set_loop(selections)
@@ -61,7 +63,6 @@ module SetVerify
     shape_unique = true # All cards have a unique shape.
 
     # Each attribute is compared.
-
     num_unique = false if $Deck[selections[0]].num == $Deck[selections[1]].num ||
                           $Deck[selections[0]].num == $Deck[selections[2]].num ||
                           $Deck[selections[1]].num == $Deck[selections[2]].num

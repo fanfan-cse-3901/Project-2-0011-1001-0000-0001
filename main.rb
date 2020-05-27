@@ -5,7 +5,13 @@ load 'player_input.rb'
 
 # Created 05/25/2020 by Amanda Cheng
 # Edited 05/26/2020 by Yifan Yao: refactor codes, remove global variables by steps
-# Initialize array of players. Assume at least 2 players.
+# Edited 05/27/2020 by Kevin Dong: Added Documentation
+# Public: Initialize array of players. Assume at least 2 players.
+#
+# num_players - Integer for number of players active.
+# person_arr - Array of Player objects to be populated.
+#
+# Returns the populated array, person_arr.
 def create_array(num_players, person_arr)
   (0...num_players).each do |n|
     person_arr[n] = Player.new(n + 1)
@@ -15,7 +21,12 @@ def create_array(num_players, person_arr)
 end
 
 # Created 05/26/2020 by Yifan Yao
-# Display sorted score
+# Edited 05/27/2020 by Kevin Dong: Added Documentation
+# Public: Displays the sorted score of current players
+#
+# num_players - Integer for number of players active.
+# person_arr - Populated array of Player objects.
+# Outputs the score via console.
 def display_sorted_score(num_players, person_arr)
   player_summary = {}
   (0...num_players).each do |n|
@@ -30,7 +41,12 @@ def display_sorted_score(num_players, person_arr)
 end
 
 # Created 05/25/2020 by Amanda Cheng
-# Initialize array of players. Assume at least 2
+# Edited 05/27/2020 by Kevin Dong: Added Documentation
+# Public: Initialize array of players. Assume at least 2
+#
+# person_arr - Array of Player objects to be populated.
+#
+# Returns number of players.
 def pre_game_selection(person_arr)
   print 'Enter number of players (at least 2): '
   num_players = gets.chomp.to_i
@@ -44,6 +60,12 @@ def pre_game_selection(person_arr)
 end
 
 # Created 05/26/2020 by Yifan Yao
+# Edited 05/27/2020 by Kevin Dong: Added Documentation
+# Public: Handles player selection, round control, and score.
+#
+# sel - Integer that reflects game-state.
+#
+# Returns nothing.
 def selection(sel)
   if sel == 1
 
@@ -59,6 +81,10 @@ def selection(sel)
   end
 end
 
+# Edited 05/27/2020 by Kevin Dong: Added Documentation
+# Public: Handles end of round/game scenario.
+#
+# Returns nothing.
 def game_menu
   sel = -1
   until sel.positive? && sel < 4
@@ -70,7 +96,8 @@ def game_menu
 end
 
 sel = 2
-while true
+# Edited 05/25/20 by Kevin: replaced While true with loop do
+loop do
   selection(sel)
   sel = game_menu
 end

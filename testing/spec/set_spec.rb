@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# File created 05/25/20 by Kevin Dong
+# File created 05/25/2020 by Kevin Dong
 require 'rspec'
 require './set_verify.rb'
 
