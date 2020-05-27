@@ -14,9 +14,7 @@ describe SetGame do
     it 'should return false' do
       set_vert = SetGame.new
       a = nil
-      b = nil
-      c = nil
-      is_set = set_vert.is_set(a, b, c)
+      is_set = set_vert.is_set(a)
       expect(is_set).to eq false
     end
   end
