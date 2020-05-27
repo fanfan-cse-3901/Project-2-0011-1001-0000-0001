@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # File created 05/25/2020 by Yifan Yao
-
 load 'validate.rb'
 load 'player_input.rb'
 
@@ -41,4 +40,3 @@ def post_game_selection
 
   sel
 end
-
