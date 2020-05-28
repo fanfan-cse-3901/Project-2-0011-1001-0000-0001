@@ -89,7 +89,7 @@ def player_input(num_players, person_arr)
       puts 'It is a set!'
       person_arr[num - 1].win_pts
       puts "Player #{num}'s Score: #{person_arr[num - 1].current_pts}" # Outputs the player's score
-      puts card_sort = card.sort
+      card_sort = card.sort
 
       # If is set, remove from table array
       $table.delete_at(card_sort[0])
