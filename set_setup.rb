@@ -1,5 +1,9 @@
-#creates an object class
-#creates a hash of hashes for the cards
+#Internal: Only used for creation of deck and referring to card attributes only for this project
+#
+#Examples
+#
+#     Card.new(1,1,1,1)
+#     #=>card object with num=1 color=1 shade=1 shape=1
 class Card
   attr_accessor :num,:color,:shade,:shape
   def initialize(num,color,shade,shape)
