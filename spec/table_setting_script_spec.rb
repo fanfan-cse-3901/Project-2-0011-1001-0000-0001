@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-require_relative '../spec/spec_helper.rb'
-require_relative '../lib/table_setting_script.rb'
+require_relative './spec_helper'
+require_relative '../table_setting_script'
 
-
-describe TableSetting do
+RSpec.describe TableSetting do
   context 'table is empty' do
     it 'Gets the proper dealt cards with at least one set when dealer has greater than 12 cards' do
       tab = []
@@ -87,7 +86,6 @@ describe TableSetting do
       end
       expect(TableSetting.set_table(tab, deal)).to eq(true)
     end
-
   end
 
   context 'table has 15 elements' do
