@@ -1,2 +1,2 @@
---require spec_helper
 --default-path testing/spec
+--require spec_helper
