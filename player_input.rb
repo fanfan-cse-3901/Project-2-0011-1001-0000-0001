@@ -75,7 +75,7 @@ def player_input(num_players, person_arr)
     (1..3).each { |i|
       print "Card #{i}: "
       card[i-1] = gets.to_i-1
-      while (card[i - 1] > num_cards_table) || (card[i -1] < 0) || (card[2] == card[0]) || (card[2] == card[1])
+      while (card[i - 1] >= num_cards_table) || (card[i -1] < 0) || (card[2] == card[0]) || (card[2] == card[1])
         print 'Card not valid. Try again: '
         card[i - 1] = gets.to_i-1
       end
@@ -89,10 +89,13 @@ def player_input(num_players, person_arr)
       puts 'It is a set!'
       person_arr[num - 1].win_pts
       puts "Player #{num}'s Score: #{person_arr[num - 1].current_pts}" # Outputs the player's score
+      puts card_sort = card.sort
+
       # If is set, remove from table array
-      puts $table.delete_at(card[0])
-      puts $table.delete_at(card[1])
-      puts $table.delete_at(card[2])
+      $table.delete_at(card_sort[0])
+      $table.delete_at(card_sort[1]-1)
+      $table.delete_at(card_sort[2]-2)
+
       # Call set_table method from Prachiti to replace cards --YET TO BE WRITTEN
       TableSetting.set_table($table, $dealer)
 
