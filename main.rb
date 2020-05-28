@@ -66,9 +66,11 @@ end
 # sel - Integer that reflects game-state.
 #
 # Returns nothing.
-def selection(sel)
+def selection(sel, num_players, person_arr)
   if sel == 1
-
+    player_input(num_players, person_arr)
+    puts 'End of round'
+    display_sorted_score(num_players, person_arr)
   elsif sel == 2
     person_arr = []
     num_players = pre_game_selection(person_arr)
@@ -94,9 +96,14 @@ def game_menu
   sel
 end
 
-sel = 2
+person_arr = []
+num_players = pre_game_selection(person_arr)
+player_input(num_players, person_arr)
+puts 'End of round'
+display_sorted_score(num_players, person_arr)
+
 # Edited 05/25/20 by Kevin: replaced While true with loop do
 loop do
-  selection(sel)
   sel = game_menu
+  selection(sel, num_players, person_arr)
 end
