@@ -68,7 +68,7 @@ module SetVerify
                           $Deck[selections[1]].num == $Deck[selections[2]].num
     set_num = true if $Deck[selections[0]].num == $Deck[selections[1]].num &&
                       $Deck[selections[0]].num == $Deck[selections[2]].num &&
-                      $Deck[selections[1]].num && $Deck[selections[2]].num
+                      $Deck[selections[1]].num == $Deck[selections[2]].num
 
     color_unique = false if $Deck[selections[0]].color == $Deck[selections[1]].color ||
                             $Deck[selections[0]].color == $Deck[selections[2]].color ||
@@ -92,8 +92,6 @@ module SetVerify
                         $Deck[selections[1]].shape == $Deck[selections[2]].shape
 
     # Cards are a set if they all share at least one or no attribute(s).
-    set_indeed = true if set_num || set_color || set_shade || set_shape
-    set_indeed = true if num_unique && color_unique && shade_unique && shape_unique
-    set_indeed
+    (num_unique || set_num) && (color_unique || set_color) && (shade_unique || set_shade) && (shape_unique || set_shape)
   end
 end

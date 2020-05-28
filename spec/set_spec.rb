@@ -135,7 +135,7 @@ describe SetVerify do
       # c = 1, n = 1, d = 1, p = 3
       # c = 1, n = 1, d = 2, p = 1
       is_set = SetVerify.is_set(a)
-      expect(is_set).to eq true
+      expect(is_set).to eq false
     end
 
     # Empty
