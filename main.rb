@@ -50,7 +50,6 @@ def selection(sel)
   elsif sel == 2
     person_arr = []
     num_players = pre_game_selection(person_arr)
-    num_players = pre_game_selection(person_arr)
     player_input(num_players, person_arr)
     puts 'End of round'
     display_sorted_score(num_players, person_arr)
