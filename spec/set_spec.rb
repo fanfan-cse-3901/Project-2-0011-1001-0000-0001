@@ -14,35 +14,35 @@ class Card
     @shape=shape
   end
 end
-#first test case
-#test code for og card
-#og.num=1
-#og.shape="blank"
-#og.shade="blank"
-#og.color="blank"
-#puts og.num
-i=0 #iterator to populate hashmap
-j=0 #iterator for number
-k=0 #iterator for color
-l=0 #iterator for shade
-m=0 #iterator for shape
+# first test case
+# test code for og card
+# og.num=1
+# og.shape="blank"
+# og.shade="blank"
+# og.color="blank"
+# puts og.num
+i=0 # iterator to populate hash-map
+j=0 # iterator for number
+k=0 # iterator for color
+l=0 # iterator for shade
+m=0 # iterator for shape
 num_A=[1,2,3]
-color_A=[1,2,3]#["red","green","purple"]
-shade_A=[1,2,3]#["solid","striped","open"]
-shape_A=[1,2,3]#["diamond","squiggle","oval"]
-cards = Array.new #temporary pointer
-#populates the hashmap
-#num array
+color_A=[1,2,3] # ["red","green","purple"]
+shade_A=[1,2,3] # ["solid","striped","open"]
+shape_A=[1,2,3] # ["diamond","squiggle","oval"]
+cards = Array.new # temporary pointer
+# populates the hashmap
+# num array
 while j <num_A.length
-  #color array
+  # color array
   while k<color_A.length
-    #shade array
+    # shade array
     while l<shade_A.length
-      #shape array
+      # shape array
       while m<shape_A.length
-        #initializes all values
-        cards[i] = Card.new(num_A[j],color_A[k],shade_A[l],shape_A[m]) #adds new Card object at a place in array
-        i+=1 #adusts index of hash by one.
+        # initializes all values
+        cards[i] = Card.new(num_A[j],color_A[k],shade_A[l],shape_A[m]) # adds new Card object at a place in array
+        i+=1 # adusts index of hash by one.
         m+=1
       end
       l+=1
@@ -127,8 +127,8 @@ describe SetVerify do
       expect(is_set).to eq true
     end
 
-    # Matching Set
-    it 'should return true' do
+    # Not a Set 2 to 1
+    it 'should return false' do
       set_vert = SetG.new
       a = [1, 2, 3]
       # c = 1, n = 1, d = 1, p = 2
