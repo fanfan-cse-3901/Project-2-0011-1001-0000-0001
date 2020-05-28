@@ -63,23 +63,23 @@ module SetVerify
     shape_unique = true # All cards have a unique shape.
 
     # Each attribute is compared.
-    num_unique = false if $Deck[selections[0]].num == $Deck[selections[1]].num ||
-                          $Deck[selections[0]].num == $Deck[selections[2]].num ||
-                          $Deck[selections[1]].num == $Deck[selections[2]].num
-    set_num = true if $Deck[selections[0]].num == $Deck[selections[1]].num &&
-                      $Deck[selections[0]].num == $Deck[selections[2]].num &&
-                      $Deck[selections[1]].num == $Deck[selections[2]].num
+    num_unique = false if ($Deck[selections[0]].num == $Deck[selections[1]].num) ||
+                          ($Deck[selections[0]].num == $Deck[selections[2]].num) ||
+                          ($Deck[selections[1]].num == $Deck[selections[2]].num)
+    set_num = true if ($Deck[selections[0]].num == $Deck[selections[1]].num) &&
+                      ($Deck[selections[0]].num == $Deck[selections[2]].num) &&
+                      ($Deck[selections[1]].num == $Deck[selections[2]].num)
 
-    color_unique = false if $Deck[selections[0]].color == $Deck[selections[1]].color ||
-                            $Deck[selections[0]].color == $Deck[selections[2]].color ||
-                            $Deck[selections[1]].color == $Deck[selections[2]].color
-    set_color = true if $Deck[selections[0]].color == $Deck[selections[1]].color &&
-                        $Deck[selections[0]].color == $Deck[selections[2]].color &&
-                        $Deck[selections[1]].color == $Deck[selections[2]].color
+    color_unique = false if ($Deck[selections[0]].color == $Deck[selections[1]].color) ||
+                            ($Deck[selections[0]].color == $Deck[selections[2]].color) ||
+                            ($Deck[selections[1]].color == $Deck[selections[2]].color)
+    set_color = true if ($Deck[selections[0]].color == $Deck[selections[1]].color) &&
+                        ($Deck[selections[0]].color == $Deck[selections[2]].color) &&
+                        ($Deck[selections[1]].color == $Deck[selections[2]].color)
 
-    shade_unique = false if $Deck[selections[0]].shade == $Deck[selections[1]].shade ||
-                            $Deck[selections[0]].shade == $Deck[selections[2]].shade ||
-                            $Deck[selections[1]].shade == $Deck[selections[2]].shade
+    shade_unique = false if ($Deck[selections[0]].shade == $Deck[selections[1]].shade) ||
+                            ($Deck[selections[0]].shade == $Deck[selections[2]].shade) ||
+                            ($Deck[selections[1]].shade == $Deck[selections[2]].shade)
     set_shade = true if $Deck[selections[0]].shade == $Deck[selections[1]].shade &&
                         $Deck[selections[0]].shade == $Deck[selections[2]].shade &&
                         $Deck[selections[1]].shade == $Deck[selections[2]].shade
@@ -92,6 +92,6 @@ module SetVerify
                         $Deck[selections[1]].shape == $Deck[selections[2]].shape
 
     # Cards are a set if they all share at least one or no attribute(s).
-    (num_unique || set_num) && (color_unique || set_color) && (shade_unique || set_shade) && (shape_unique || set_shape)
+    ((num_unique ^ set_num) && (color_unique ^ set_color) && (shade_unique ^ set_shade) && (shape_unique ^ set_shape))
   end
 end

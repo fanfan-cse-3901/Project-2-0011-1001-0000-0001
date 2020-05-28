@@ -37,7 +37,7 @@ module TableSetting
     numbers = %w[one two three]
     shapes = %w[diamond squiggle oval]
     colors = %w[red green purple]
-    shades = %w[solid stripped open]
+    shades = %w[solid striped open]
     # Prints out each card on the table
     unless table.length.zero?
       (0...table.length).each do |n|
