@@ -3,11 +3,11 @@
 # File created 05/25/2020 by Kevin Dong
 
 # Public: Methods for verifying if 3 cards are able to form a set.
-# is_set methods should have array of 3 integers passed in.
+# is_set? methods should have array of 3 integers passed in.
 module SetVerify
   # Public: Dummy method.
   # Outputs "is set".
-  def set?
+  def self.set?
     'is set'
   end
 
@@ -49,7 +49,7 @@ module SetVerify
   # selections - array of cards to be matched.
   #
   # Returns true if set, otherwise false.
-  def SetVerify.is_set(selections)
+  def SetVerify.is_set?(selections)
     return false if selections.empty?
 
     set_indeed = false  # Cards are indeed a set.
