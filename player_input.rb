@@ -2,9 +2,10 @@
 
 # File created 05/25/2020 by Amanda Cheng
 require './set_verify.rb'
-require './testing/lib/table_setting_script.rb'
+require './table_setting_script.rb'
 
 # Created 05/25/2020 by Amanda Cheng
+# Edited 05/29/2020 by Yifan Yao: remove debugging lines, interaction with main.rb
 class Player
   attr_accessor :player_num, :score
 
@@ -44,17 +45,16 @@ end
 # on 05/26/2020
 def player_input(num_players, person_arr)
 
-  # i is for debugging purposes will remove later
-  i = 0
   # This checks when deck is empty and no set from table
   continue_game = true
   first_time = true
+
   # Continue playing for the round until end game
-  while continue_game && (i < 5) # i < 5 is to terminate game at some point for debugging purposes
-    #Only want output table once because calling set_table later on
+  while continue_game
+    # Only want output table once because calling set_table later on
     if first_time
       TableSetting.set_table($table, $dealer)
-      first_time = false;
+      first_time = false
     end
 
     print 'Input number of player who yells SET first: '
@@ -74,10 +74,10 @@ def player_input(num_players, person_arr)
     card = [-1, -2, -3]
     (1..3).each { |i|
       print "Card #{i}: "
-      card[i-1] = gets.to_i
-      while (card[i - 1] > num_cards_table) || (card[i -1] <= 0) || (card[2] == card[0]) || (card[2] == card[1])
+      card[i - 1] = gets.to_i - 1
+      while (card[i - 1] >= num_cards_table) || (card[i - 1] < 0) || (card[2] == card[0]) || (card[2] == card[1])
         print 'Card not valid. Try again: '
-        card[i - 1] = gets.to_i
+        card[i - 1] = gets.to_i - 1
       end
     }
 
@@ -89,16 +89,17 @@ def player_input(num_players, person_arr)
       puts 'It is a set!'
       person_arr[num - 1].win_pts
       puts "Player #{num}'s Score: #{person_arr[num - 1].current_pts}" # Outputs the player's score
+      card_sort = card.sort
       # If is set, remove from table array
-      $table.delete_at(card[0])
-      $table.delete_at(card[1])
-      $table.delete_at(card[2])
-      # Call set_table method from Prachiti to replace cards --YET TO BE WRITTEN
+      $table.delete_at(card_sort[0])
+      $table.delete_at(card_sort[1] - 1)
+      $table.delete_at(card_sort[2] - 2)
+
+      # Call set_table method from Prachiti to replace cards
       TableSetting.set_table($table, $dealer)
 
-      # Call method which tests if end of game (deck empty and no set on table) --NOT YET IMPLEMENTED
-      # Continue_game = --NOT YET IMPLEMENTED
-      if $dealer.empty? #NEED TO STILL TEST IF THERE IS AT LEAST 1 SET ON TABLE
+      # Call method which tests if end of game (deck empty and no set on table)
+      if $dealer.empty? && !TableSetting.at_least_one_set($table)
         continue_game = false
       end
     else
@@ -106,10 +107,8 @@ def player_input(num_players, person_arr)
       puts 'Not a set! '
       person_arr[num - 1].lose_pts
       puts "Player #{num}'s Score: #{person_arr[num - 1].current_pts}" # Outputs the player's score
+      puts ''
     end
 
-
-    # Testing purposes can ignore
-    i += 1
   end
 end

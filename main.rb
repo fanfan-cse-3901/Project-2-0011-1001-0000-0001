@@ -5,7 +5,8 @@ load 'player_input.rb'
 
 # Created 05/25/2020 by Amanda Cheng
 # Edited 05/26/2020 by Yifan Yao: refactor codes, remove global variables by steps
-# Edited 05/27/2020 by Kevin Dong: Added Documentation
+# Edited 05/27/2020 by Kevin Dong: added documentation
+# Edited 05/26/2020 by Yifan Yao: interaction with player_input.rb
 # Public: Initialize array of players. Assume at least 2 players.
 #
 # num_players - Integer for number of players active.
@@ -66,12 +67,13 @@ end
 # sel - Integer that reflects game-state.
 #
 # Returns nothing.
-def selection(sel)
+def selection(sel, num_players, person_arr)
   if sel == 1
-
+    player_input(num_players, person_arr)
+    puts 'End of round'
+    display_sorted_score(num_players, person_arr)
   elsif sel == 2
     person_arr = []
-    num_players = pre_game_selection(person_arr)
     num_players = pre_game_selection(person_arr)
     player_input(num_players, person_arr)
     puts 'End of round'
@@ -95,9 +97,14 @@ def game_menu
   sel
 end
 
-sel = 2
+person_arr = []
+num_players = pre_game_selection(person_arr)
+player_input(num_players, person_arr)
+puts 'End of round'
+display_sorted_score(num_players, person_arr)
+
 # Edited 05/25/20 by Kevin: replaced While true with loop do
 loop do
-  selection(sel)
   sel = game_menu
+  selection(sel, num_players, person_arr)
 end
