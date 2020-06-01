@@ -20,7 +20,7 @@ module TableSetting
       (0...(table.length - 2)).each do |i|
         ((i + 1)...(table.length - 1)).each do |j|
           ((j + 1)...table.length).each do |k|
-            val = true if SetVerify.is_set([table[i], table[j], table[k]])
+            val = true if SetVerify.is_set?([table[i], table[j], table[k]])
             break if val == true
           end
           break if val == true
