@@ -3,7 +3,7 @@
 # File created 05/25/2020 by Kevin Dong
 # Edited 05/30/2020 by Kevin Dong: Test refactoring, cleanup, and fixes
 require 'rspec'
-require './set_setup.rb'
+require './testing/set_setup_old.rb'
 require './set_verify.rb'
 require './table_setting_script.rb'
 

@@ -17,7 +17,7 @@ module SetVerify
   # selections - array of 3 cards numbers (integers) to be matched.
   #
   # Returns true if set, otherwise false.
-  def SetVerify.is_set_loop(selections)
+  def self.is_set_loop(selections)
     # TODO: Improve & Fix
     return false if selections.empty?
 
@@ -31,10 +31,14 @@ module SetVerify
     selections.each do |i|
       break if i == 2
 
-      set_num = false if $Deck[selections[i]].num != $Deck[selections[i + 1]].num || $Deck[selections[0]].num == $Deck[selections[2]].num
-      set_color = false if $Deck[selections[i]].color != $Deck[selections[i + 1]].color || $Deck[selections[0]].color == $Deck[selections[2]].color
-      set_shade = false if $Deck[selections[i]].shade != $Deck[selections[i + 1]].shade || $Deck[selections[0]].shade == $Deck[selections[2]].shade
-      set_shape = false if $Deck[selections[i]].shape != $Deck[selections[i + 1]].shape || $Deck[selections[0]].shape == $Deck[selections[2]].shape
+      set_num = false if $Deck[selections[i]].num != $Deck[selections[i + 1]].num ||
+                         $Deck[selections[0]].num == $Deck[selections[2]].num
+      set_color = false if $Deck[selections[i]].color != $Deck[selections[i + 1]].color ||
+                           $Deck[selections[0]].color == $Deck[selections[2]].color
+      set_shade = false if $Deck[selections[i]].shade != $Deck[selections[i + 1]].shade ||
+                           $Deck[selections[0]].shade == $Deck[selections[2]].shade
+      set_shape = false if $Deck[selections[i]].shape != $Deck[selections[i + 1]].shape ||
+                           $Deck[selections[0]].shape == $Deck[selections[2]].shape
     end
 
     # Cards are a set if they all share at least one or no attribute(s).
@@ -43,13 +47,13 @@ module SetVerify
     set_indeed
   end
 
-  # Created 05/25/20 by Kevin Dong
+  # Created 05/25/2020 by Kevin Dong
   # Public: Verifies if incoming cards is a set.
   #
   # selections - array of cards to be matched.
   #
   # Returns true if set, otherwise false.
-  def SetVerify.is_set?(selections)
+  def self.is_set?(selections)
     return false if selections.empty?
 
     set_indeed = false  # Cards are indeed a set.
@@ -93,5 +97,15 @@ module SetVerify
 
     # Cards are a set if they all share at least one or no attribute(s).
     ((num_unique ^ set_num) && (color_unique ^ set_color) && (shade_unique ^ set_shade) && (shape_unique ^ set_shape))
+  end
+
+  #  05/31/2020
+  # Internal: Given two cards, find potential 3rd cards to form a set.
+  #
+  # selections - array of 2 cards to be matched
+  #
+  # Returns array of potential cards.
+  def self.find_set(selections)
+
   end
 end
