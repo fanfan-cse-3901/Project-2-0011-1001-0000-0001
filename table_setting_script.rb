@@ -14,7 +14,7 @@ module TableSetting
 
   # Checks if there is at least one set on the table.
   # Created on 5/26/2020 by Prachiti Garge
-  def self.at_least_one_set(table)
+  def self.at_least_one_set?(table)
     val = false
     unless table.empty?
       (0...(table.length - 2)).each do |i|
@@ -41,7 +41,7 @@ module TableSetting
     # Prints out each card on the table
     unless table.length.zero?
       (0...table.length).each do |n|
-        puts "#{n + 1}: #{numbers[($Deck[table[n]].num - 1)]}, #{shapes[($Deck[table[n]].shape - 1)]}, #{colors[($Deck[table[n]].color - 1)]}, #{shades[($Deck[table[n]].shade - 1)]}"
+        puts "#{table[n]}: #{numbers[($Deck[table[n]].num - 1)]}, #{shapes[($Deck[table[n]].shape - 1)]}, #{colors[($Deck[table[n]].color - 1)]}, #{shades[($Deck[table[n]].shade - 1)]}"
       end
     end
     puts message
@@ -56,7 +56,7 @@ module TableSetting
     message = []
 
     # This loop adds three cards at a time.
-    while !dealer.length.zero? && (table.length < 12 || (table.length >= 12 && !at_least_one_set(table)))
+    while !dealer.length.zero? && (table.length < 12 || (table.length >= 12 && !at_least_one_set?(table)))
       # Add 3 cards to table and remove from dealer
       3.times do
         val = dealer.sample
@@ -70,6 +70,6 @@ module TableSetting
     # Print out the table and message
     print_table(table, message)
     # For testing, I will return a boolean to check if conditions were correctly implemented to add cards.
-    at_least_one_set(table) || dealer.length.zero?
+    at_least_one_set?(table) || dealer.length.zero?
   end
 end
