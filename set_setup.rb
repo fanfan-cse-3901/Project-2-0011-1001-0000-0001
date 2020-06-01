@@ -1,79 +1,46 @@
-# frozen_string_literal: true
-
-# File created 05/24/2020 by Troy Stein
-# Edited 05/27/2020 by Kevin Dong: Documentation and Style Formatting
-
-# creates an object class
-# creates a hash of hashes for the cards
-
 #Internal: Only used for creation of deck and referring to card attributes only for this project
 #
 #Examples
 #
 #     Card.new(1,1,1,1)
 #     #=>card object with num=1 color=1 shade=1 shape=1
+#
+#num- number of shapes on a card
+#
+#shape- the way an object looks
+#
+#shade- how filled are the shapes
+#
+#color- the color of the shapes
 class Card
-  attr_accessor :num, :color, :shade, :shape
-  def initialize(num, color, shade, shape)
-    @num = num
-    @color = color
-    @shade = shade
-    @shape = shape
+  #Internal :Gets the number of a said attribute
+  attr_accessor :num,:color,:shade,:shape
+  #Internal: Initialize all attributes of card REQUIRED
+  def initialize(num,color,shade,shape)
+    @num=num
+    @color=color
+    @shade=shade
+    @shape=shape
   end
 end
-
-# first test case
-# test code for og card
-# og.num = 1
-# og.shape = "blank"
-# og.shade = "blank"
-# og.color = "blank"
-# puts og.num
-i = 0 # iterator to populate hashmap
-j = 0 # iterator for number
-k = 0 # iterator for color
-l = 0 # iterator for shade
-m = 0 # iterator for shape
-num_A = [1, 2, 3]
-color_A = [1, 2, 3] # ["red","green","purple"]
-shade_A = [1, 2, 3] # ["solid","striped","open"]
-shape_A = [1, 2, 3] # ["diamond","squiggle","oval"]
-cards = [] # temporary pointer
-
-# populates the array
-# num array
-while j < num_A.length
-  # color array
-  while k < color_A.length
-    # shade array
-    while l < shade_A.length
-      # shape array
-      while m < shape_A.length
-        # initializes all values
-        cards[i] = Card.new(num_A[j], color_A[k], shade_A[l], shape_A[m]) # adds new Card object at a place in array
-        i += 1 # adusts index of hash by one.
-        m += 1
-      end
-      l += 1
-      m = 0
-    end
-    k += 1
-    l = 0
-  end
-  j += 1
-  k = 0
+#Example:
+#
+#        cardone()
+#        #=>set of cards for set where order of change is (num,color,shape,shade) repsectively in that order
+#
+#Returns the Deck of Cards for set
+def cardone()
+  num_A=[1,2,3]#[1,2,3]
+  color_A=[1,2,3]#["red","green","purple"] 
+  shade_A=[1,2,3]#["solid","striped","open"]
+  shape_A=[1,2,3]#["squiggle","diamond","oval"]
+  cards = Array.new #to be returned
+  n=0#num location
+  #loops through all cards
+  (0..80).each do |n|           
+    #% based on when to adjust according to base-3
+    cards[n]= Card.new(num_A[n%3],color_A[(n/3)%3],shade_A[(n/27)%3],shape_A[(n/9)%3])
+  end   
+  cards #returned element
 end
 
-$Deck = cards # makes constant pointer
-# puts $Deck[45].shape
-# arrays
-$table = []; # shows cards on the table
-$dealer = [] # shows the dealer
-i = 0
-# gives dealer all the cards aka the keys
-while i < 81
-  $dealer[i] = i
-  i += 1
-end
-# puts $dealer[56]
-$discarded = [] # shows discarded cards
