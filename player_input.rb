@@ -84,7 +84,7 @@ def player_input(num_players, person_arr)
     #set_vert = SetG.new
     # c1 = table[card1.to_i]
 
-    if SetVerify.is_set(card)
+    if SetVerify.is_set?(card)
       # Output that it is a set and update score
       puts 'It is a set!'
       person_arr[num - 1].win_pts

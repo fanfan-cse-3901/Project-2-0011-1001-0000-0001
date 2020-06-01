@@ -1,0 +1,82 @@
+1: one, diamond, red, solid         #0
+2: one, squiggle, red, solid        #1
+3: one, oval, red, solid            #2
+4: one, diamond, red, striped       #3 etc...
+5: one, squiggle, red, striped
+6: one, oval, red, striped
+7: one, diamond, red, open
+8: one, squiggle, red, open
+9: one, oval, red, open
+10: one, diamond, green, solid
+11: one, squiggle, green, solid
+12: one, oval, green, solid
+13: one, diamond, green, striped
+14: one, squiggle, green, striped
+15: one, oval, green, striped
+16: one, diamond, green, open
+17: one, squiggle, green, open
+18: one, oval, green, open
+19: one, diamond, purple, solid
+20: one, squiggle, purple, solid
+21: one, oval, purple, solid
+22: one, diamond, purple, striped
+23: one, squiggle, purple, striped
+24: one, oval, purple, striped
+25: one, diamond, purple, open
+26: one, squiggle, purple, open
+27: one, oval, purple, open
+28: two, diamond, red, solid        #27
+29: two, squiggle, red, solid       #28
+30: two, oval, red, solid           #29
+31: two, diamond, red, striped      #30 etc...
+32: two, squiggle, red, striped
+33: two, oval, red, striped
+34: two, diamond, red, open
+35: two, squiggle, red, open
+36: two, oval, red, open
+37: two, diamond, green, solid
+38: two, squiggle, green, solid
+39: two, oval, green, solid
+40: two, diamond, green, striped
+41: two, squiggle, green, striped
+42: two, oval, green, striped
+43: two, diamond, green, open
+44: two, squiggle, green, open
+45: two, oval, green, open
+46: two, diamond, purple, solid
+47: two, squiggle, purple, solid
+48: two, oval, purple, solid
+49: two, diamond, purple, striped
+50: two, squiggle, purple, striped
+51: two, oval, purple, striped
+52: two, diamond, purple, open
+53: two, squiggle, purple, open
+54: two, oval, purple, open
+55: three, diamond, red, solid      #54
+56: three, squiggle, red, solid     #55
+57: three, oval, red, solid         #56
+58: three, diamond, red, striped    #57 etc...
+59: three, squiggle, red, striped
+60: three, oval, red, striped
+61: three, diamond, red, open
+62: three, squiggle, red, open
+63: three, oval, red, open
+64: three, diamond, green, solid
+65: three, squiggle, green, solid
+66: three, oval, green, solid
+67: three, diamond, green, striped
+68: three, squiggle, green, striped
+69: three, oval, green, striped
+70: three, diamond, green, open
+71: three, squiggle, green, open
+72: three, oval, green, open
+73: three, diamond, purple, solid
+74: three, squiggle, purple, solid
+75: three, oval, purple, solid
+76: three, diamond, purple, striped
+77: three, squiggle, purple, striped
+78: three, oval, purple, striped
+79: three, diamond, purple, open
+80: three, squiggle, purple, open
+81: three, oval, purple, open
+yeet we complete
