@@ -23,10 +23,7 @@ end
 
 # Created 05/26/2020 by Yifan Yao
 # Edited 05/27/2020 by Kevin Dong: Added Documentation
-# Public: Displays the sorted score of current players
-#
-# num_players - Integer for number of players active.
-# person_arr - Populated array of Player objects.
+# Edited 05/31/2020 by Amanda Cheng: Displayed Winner
 # Outputs the score via console.
 def display_sorted_score(num_players, person_arr)
   player_summary = {}
@@ -35,10 +32,11 @@ def display_sorted_score(num_players, person_arr)
   end
 
   player_summary = player_summary.sort_by { |_k, v| -v }.to_h
-
+  puts "Leaderboard"
   player_summary.each do |i|
-    puts "Player #{i[0]}: #{i[1]}"
+   puts "Player #{i[0]} Score: #{i[1]}"
   end
+
 end
 
 # Created 05/25/2020 by Amanda Cheng
@@ -69,14 +67,20 @@ end
 # Returns nothing.
 def selection(sel, num_players, person_arr)
   if sel == 1
+
     player_input(num_players, person_arr)
-    puts 'End of round'
+    puts "#############################################"
+    puts 'Out of time! End of round'
+    puts "#############################################"
     display_sorted_score(num_players, person_arr)
   elsif sel == 2
     person_arr = []
     num_players = pre_game_selection(person_arr)
+
     player_input(num_players, person_arr)
-    puts 'End of round'
+    puts "#############################################"
+    puts 'Out of time! End of round'
+    puts "#############################################"
     display_sorted_score(num_players, person_arr)
   elsif sel == 3
     exit
@@ -97,10 +101,13 @@ def game_menu
   sel
 end
 
+
 person_arr = []
 num_players = pre_game_selection(person_arr)
 player_input(num_players, person_arr)
-puts 'End of round'
+puts "#############################################"
+puts 'Out of time! End of round'
+puts "#############################################"
 display_sorted_score(num_players, person_arr)
 
 # Edited 05/25/20 by Kevin: replaced While true with loop do
