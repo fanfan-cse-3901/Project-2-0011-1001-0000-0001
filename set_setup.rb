@@ -32,12 +32,11 @@ end
 #
 # Returns the Deck of Cards for set
 def cardone
-  num_A = [1, 2, 3] # [1,2,3]
-  color_A = [1, 2, 3] # ["red","green","purple"]
-  shade_A = [1, 2, 3] # ["solid","striped","open"]
-  shape_A = [1, 2, 3] # ["squiggle","diamond","oval"]
+  num_A = [1, 2, 3] # [1, 2, 3]
+  color_A = [1, 2, 3] # ["red", "green", "purple"]
+  shade_A = [1, 2, 3] # ["solid", "striped", "open"]
+  shape_A = [1, 2, 3] # ["squiggle", "diamond", "oval"]
   cards = [] # to be returned
-  n = 0 # num location
   # loops through all cards
   (0..80).each do |n|
     # % based on when to adjust according to base-3

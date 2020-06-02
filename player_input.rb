@@ -75,7 +75,7 @@ def player_input(num_players, person_arr)
     (1..3).each { |i|
       print "Card #{i}: "
       card[i - 1] = gets.to_i - 1
-      while (card[i - 1] >= num_cards_table) || (card[i - 1] < 0) || (card[2] == card[0]) || (card[2] == card[1])
+      while (card[i - 1] >= num_cards_table) || card[i - 1].negative? || (card[2] == card[0]) || (card[2] == card[1])
         print 'Card not valid. Try again: '
         card[i - 1] = gets.to_i - 1
       end
