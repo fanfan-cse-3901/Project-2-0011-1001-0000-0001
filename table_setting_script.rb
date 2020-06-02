@@ -2,17 +2,21 @@
 
 require_relative './set_verify.rb'
 require_relative './set_setup.rb'
-# TableSetting
+
 # This modules contains methods to set up the table correctly.
 # Others only need to call TableSetting.set_table from this module
 # Methods implemented are set_table, print_table, and at_least_one_set
+#
 # Created on 5/26/2020 by Prachiti Garge
 # Edited on 5/27/2020 by Prachiti Garge: Deleted others' code copy and instead put commands to access their code directly.
+# Edited on 6/1/2020 by Prachiti Garge: Changed the way deck is accessed according to set_setup new version.
 module TableSetting
 
   include SetVerify
 
   # Checks if there is at least one set on the table.
+  # table - Array that contains keys of cards on the table
+  #
   # Created on 5/26/2020 by Prachiti Garge
   def self.at_least_one_set?(table)
     val = false
@@ -32,8 +36,12 @@ module TableSetting
   end
 
   # Prints out table
+  # table - Array of keys of cards on table
+  # message - Array of strings to print with other notifications
+  #
   # Created on 5/26/2020 by Prachiti Garge
   def self.print_table(table, message)
+    d = cardone # Gets the deck
     numbers = %w[one two three]
     shapes = %w[diamond squiggle oval]
     colors = %w[red green purple]
@@ -41,7 +49,7 @@ module TableSetting
     # Prints out each card on the table
     unless table.length.zero?
       (0...table.length).each do |n|
-        puts "#{table[n]}: #{numbers[($Deck[table[n]].num - 1)]}, #{shapes[($Deck[table[n]].shape - 1)]}, #{colors[($Deck[table[n]].color - 1)]}, #{shades[($Deck[table[n]].shade - 1)]}"
+        puts "#{table[n]}: #{numbers[(d[table[n]].num - 1)]}, #{shapes[(d[table[n]].shape - 1)]}, #{colors[(d[table[n]].color - 1)]}, #{shades[(d[table[n]].shade - 1)]}"
       end
     end
     puts message
@@ -49,7 +57,9 @@ module TableSetting
   end
 
   # Deals the appropriate number of cards and displays the table.
-  # Only this method needs to be called by the others.
+  # table - Array of card keys on the table
+  # dealer - Array of card keys yet to be seen by the player
+  #
   # Created on 5/26/2020 by Prachiti Garge
   def self.set_table(table, dealer)
     # Default message
