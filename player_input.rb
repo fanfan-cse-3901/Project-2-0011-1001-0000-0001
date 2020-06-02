@@ -46,41 +46,40 @@ end
 # Edited 05/26/2020 by Yifan Yao: replace redundant codes by using a loop, change of implementation notified to all
 # on 05/26/2020
 def player_input(num_players, person_arr)
-  print "Do you want to set Game Round time? (y/n) "
+  print 'Do you want to set Game Round time? (y/n) '
   ans = gets.chomp
   if ans == 'y'
-    print "Set Min Game Round Time (sec): "
+    print 'Set Min Game Round Time (sec): '
     time = gets.to_i
-    elsif ans == "n"
-    time = 1<<64 #Maximum bigNum
+  elsif ans == 'n'
+    time = 1 << 64 # Maximum bigNum
   end
 
-    #time consuming operation
-    start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    elapse = end_time - start_time
-
-
+  # time consuming operation
+  start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+  end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+  elapse = end_time - start_time
 
   # This checks when deck is empty and no set from table
   continue_game = true
   first_time = true
 
   # Continue playing for the round until end game (when time is up)
-    while continue_game && elapse < time
-    #loop do
+  while continue_game && elapse < time
+    # loop do
 
-      puts ""
-      puts "TIME IS #{time} seconds"
+    puts ''
+    puts "TIME IS #{time} seconds"
     # Only want output table once because calling set_table later on
     if first_time
       TableSetting.set_table($table, $dealer)
       first_time = false
 
     end
-      end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-      elapse = end_time - start_time
-      break if elapse > time
+    end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    elapse = end_time - start_time
+    break if elapse > time
+
     print 'Input number of player who yells SET first: '
     num = gets.to_i
     # Check if player inputted valid number
@@ -89,6 +88,7 @@ def player_input(num_players, person_arr)
       end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       elapse = end_time - start_time
       break if elapse > time
+
       print 'Input number of player who yells SET first: '
 
       num = gets.to_i
@@ -96,42 +96,45 @@ def player_input(num_players, person_arr)
       elapse = end_time - start_time
       break if elapse > time
     end
-      end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-      elapse = end_time - start_time
-      break if elapse > time
+    end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    elapse = end_time - start_time
+    break if elapse > time
+
     # num_cards_table = $Table.length  # Know # of cards on table
     num_cards_table = $table.length # Debug purpose say is 12 for now
     puts "Player #{num}: Pick a set of 3 cards. Type the card # between #{1..num_cards_table}"
 
-    #status = Timeout::timeout(10, message = "out of time!"){
-      # Now obtain the 3 cards and match it with the cards on Table
-      card = [-1, -2, -3]
-      (1..3).each { |i|
-        #check time
-        end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-        elapse = end_time - start_time
-        break if elapse > time
-        print "Card #{i}: "
-
-        card[i - 1] = gets.to_i - 1
-        while (card[i - 1] >= num_cards_table) || (card[i - 1] < 0) || (card[2] == card[0]) || (card[2] == card[1])
-          print 'Card not valid. Try again: '
-          #check time
-          end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-          elapse = end_time - start_time
-          break if elapse > time
-          card[i - 1] = gets.to_i - 1
-        end
-      }
-      ## }
-
-
-    #set_vert = SetG.new
-    # c1 = table[card1.to_i]
-    # check time
+    # status = Timeout::timeout(10, message = "out of time!"){
+    # Now obtain the 3 cards and match it with the cards on Table
+    card = [-1, -2, -3]
+    (1..3).each do |i|
+      # check time
       end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       elapse = end_time - start_time
       break if elapse > time
+
+      print "Card #{i}: "
+
+      card[i - 1] = gets.to_i - 1
+      while (card[i - 1] >= num_cards_table) || card[i - 1].negative? || (card[2] == card[0]) || (card[2] == card[1])
+        print 'Card not valid. Try again: '
+        # check time
+        end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        elapse = end_time - start_time
+        break if elapse > time
+
+        card[i - 1] = gets.to_i - 1
+      end
+    end
+    ## }
+
+    # set_vert = SetG.new
+    # c1 = table[card1.to_i]
+    # check time
+    end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    elapse = end_time - start_time
+    break if elapse > time
+
     if SetVerify.is_set?(card)
       # Output that it is a set and update score
       puts 'It is a set!'
@@ -147,9 +150,7 @@ def player_input(num_players, person_arr)
       TableSetting.set_table($table, $dealer)
 
       # Call method which tests if end of game (deck empty and no set on table)
-      if $dealer.empty? && !TableSetting.at_least_one_set($table)
-        continue_game = false
-      end
+      continue_game = false if $dealer.empty? && !TableSetting.at_least_one_set($table)
     else
       # If not a set, output that it is not a set and update score
       puts 'Not a set! '
@@ -158,8 +159,8 @@ def player_input(num_players, person_arr)
       puts ''
 
     end
-    #check time
-      end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-      elapse = end_time - start_time
-    end
+    # check time
+    end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    elapse = end_time - start_time
+  end
 end

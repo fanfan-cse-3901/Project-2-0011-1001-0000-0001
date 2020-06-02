@@ -33,9 +33,9 @@ end
 # Returns the Deck of Cards for set
 def cardone
   num_A = [1, 2, 3] # [1, 2, 3]
-  color_A = [1, 2, 3] # ["red", "green", "purple"]
-  shade_A = [1, 2, 3] # ["solid", "striped", "open"]
-  shape_A = [1, 2, 3] # ["squiggle", "diamond", "oval"]
+  color_A = [1, 2, 3] # ['red', 'green', 'purple']
+  shade_A = [1, 2, 3] # ['solid', 'striped', 'open']
+  shape_A = [1, 2, 3] # ['squiggle', "diamond', 'oval']
   cards = [] # to be returned
   # loops through all cards
   (0..80).each do |n|

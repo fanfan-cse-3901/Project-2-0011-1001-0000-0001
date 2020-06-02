@@ -32,11 +32,10 @@ def display_sorted_score(num_players, person_arr)
   end
 
   player_summary = player_summary.sort_by { |_k, v| -v }.to_h
-  puts "Leaderboard"
+  puts 'Leaderboard'
   player_summary.each do |i|
-   puts "Player #{i[0]} Score: #{i[1]}"
+    puts "Player #{i[0]} Score: #{i[1]}"
   end
-
 end
 
 # Created 05/25/2020 by Amanda Cheng
@@ -69,18 +68,18 @@ def selection(sel, num_players, person_arr)
   if sel == 1
 
     player_input(num_players, person_arr)
-    puts "#############################################"
+    puts '#############################################'
     puts 'Out of time! End of round'
-    puts "#############################################"
+    puts '#############################################'
     display_sorted_score(num_players, person_arr)
   elsif sel == 2
     person_arr = []
     num_players = pre_game_selection(person_arr)
 
     player_input(num_players, person_arr)
-    puts "#############################################"
+    puts '#############################################'
     puts 'Out of time! End of round'
-    puts "#############################################"
+    puts '#############################################'
     display_sorted_score(num_players, person_arr)
   elsif sel == 3
     exit
@@ -101,13 +100,12 @@ def game_menu
   sel
 end
 
-
 person_arr = []
 num_players = pre_game_selection(person_arr)
 player_input(num_players, person_arr)
-puts "#############################################"
+puts '#############################################'
 puts 'Out of time! End of round'
-puts "#############################################"
+puts '#############################################'
 display_sorted_score(num_players, person_arr)
 
 # Edited 05/25/20 by Kevin: replaced While true with loop do
