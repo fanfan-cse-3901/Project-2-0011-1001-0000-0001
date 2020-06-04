@@ -1,55 +1,39 @@
 # frozen_string_literal: true
 
-# File created 05/25/2020 by Amanda Cheng
 require './set_verify.rb'
 require './table_setting_script.rb'
 require 'timeout'
 
-# Created 05/25/2020 by Amanda Cheng
-# Edited 05/29/2020 by Yifan Yao: remove debugging lines, interaction with main.rb
-# Edited 06/01/2020 by Amanda Cheng: added timer functionality set by user
-class Player
-  attr_accessor :player_num, :score
+# Created 06/03/2020 by Kevin Dong
+class CPU
+  attr_accessor :cpu_num, :score
 
   include SetVerify
   include TableSetting
 
-  # Created 05/25/2020 by Amanda Cheng
-  # Edited 05/26/2020 by Yifan Yao: set score to 0 by default
-  # Initialize class player with the default values
-  def initialize(player_num)
-    @player_num = player_num
+  def initialize(cpu_num)
+    @cpu_num = cpu_num
     @score = 0
   end
 
-  # Created 05/26/2020 by Yifan Yao
   def win_pts
     self.score += 1
   end
 
-  # Created 05/26/2020 by Yifan Yao
   def lose_pts
     self.score -= 1
   end
 
-  # Created 05/26/2020 by Yifan Yao
   def current_pts
     self.score
   end
 
-  attr_reader :player_num, :score
+  attr_reader :cpu_num, :score
   public :initialize, :win_pts, :lose_pts, :current_pts
 end
 
-# Created 05/25/2020 by Amanda Cheng
-# Edited 05/26/2020 by Yifan Yao: refactor codes, remove global variables by steps
-# Edited 05/26/2020 by Yifan Yao: replace redundant codes by using a loop, change of implementation notified to all
-# on 05/26/2020
-# Edited on 06/03/2020 by Kevin Dong: Important implementation to enable functionality again after set_setup changes.
 def player_input(num_players, person_arr)
-  table = []
-  dealer = (0..80).to_a
-
+  table, dealer = []
   print 'Do you want to set Game Round time? (y/n) '
   ans = gets.chomp
   if ans == 'y'
@@ -139,7 +123,7 @@ def player_input(num_players, person_arr)
     elapse = end_time - start_time
     break if elapse > time
 
-    if SetVerify.is_set?([table[card[0]],table[card[1]],table[card[2]]])
+    if SetVerify.is_set?(card)
       # Output that it is a set and update score
       puts 'It is a set!'
       person_arr[num - 1].win_pts

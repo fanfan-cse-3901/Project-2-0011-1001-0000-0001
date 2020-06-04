@@ -10,11 +10,12 @@ require_relative './set_setup.rb'
 # Created on 5/26/2020 by Prachiti Garge
 # Edited on 5/27/2020 by Prachiti Garge: Deleted others' code copy and instead put commands to access their code directly.
 # Edited on 6/1/2020 by Prachiti Garge: Changed the way deck is accessed according to set_setup new version.
+# Edited 06/03/2020 by Kevin Dong: Continued fixes to resume functionality + Documentation.
 module TableSetting
 
   include SetVerify
 
-  # Checks if there is at least one set on the table.
+  # Private: Checks if there is at least one set on the table.
   # table - Array that contains keys of cards on the table
   #
   # Created on 5/26/2020 by Prachiti Garge
@@ -35,7 +36,7 @@ module TableSetting
     val
   end
 
-  # Prints out table
+  # Private: Prints out table
   # table - Array of keys of cards on table
   # message - Array of strings to print with other notifications
   #
@@ -48,15 +49,17 @@ module TableSetting
     shades = %w[solid striped open]
     # Prints out each card on the table
     unless table.length.zero?
-      (0...table.length).each do |n|
-        puts "#{table[n]}: #{numbers[(d[table[n]].num - 1)]}, #{shapes[(d[table[n]].shape - 1)]}, #{colors[(d[table[n]].color - 1)]}, #{shades[(d[table[n]].shade - 1)]}"
+      table.each_index do |n|
+        puts "#{n + 1}. Card ##{table[n]}: #{numbers[(d[table[n]].num - 1)]}, #{shapes[(d[table[n]].shape - 1)]}, #{colors[(d[table[n]].color - 1)]}, #{shades[(d[table[n]].shade - 1)]}"
       end
     end
     puts message
     puts
+    p SetVerify.find_set(table) # PLEASE DELETE LATER
+    puts
   end
 
-  # Deals the appropriate number of cards and displays the table.
+  # Public: Deals the appropriate number of cards and displays the table.
   # table - Array of card keys on the table
   # dealer - Array of card keys yet to be seen by the player
   #

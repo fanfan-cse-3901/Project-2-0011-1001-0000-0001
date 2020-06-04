@@ -3,7 +3,7 @@
 # File created 05/24/2020 by Troy Stein
 # Edited 05/27/2020 by Kevin Dong: Documentation and Style Formatting
 # Edited 06/01/2020 by Troy Stein: Revised Deck generation method to avoid global variables
-# Edited 06/03/2020 by Kevin Dong: Re-added documentation
+# Edited 06/03/2020 by Kevin Dong: Re-added documentation and re-implemented dealer functionality
 
 # Internal: Only used for creation of deck and referring to card attributes only for this project
 #
