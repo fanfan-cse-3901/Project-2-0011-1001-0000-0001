@@ -2,6 +2,7 @@
 
 # File created 05/25/2020 by Yifan Yao
 load 'player_input.rb'
+require 'timeout'
 # Created 05/25/2020 by Amanda Cheng
 # Edited 05/26/2020 by Yifan Yao: refactor codes, remove global variables by steps
 # Edited 05/27/2020 by Kevin Dong: added documentation
@@ -47,7 +48,7 @@ end
 # Returns number of players.
 def pre_game_selection(person_arr, num_players)
   #print 'Enter number of players (at least 2): '
-  # num_players = gets.chomp.to_i
+  # $num_players = gets.chomp.to_i
   while num_players < 2
     print 'Invalid number, try again: '
     num_players = gets.chomp.to_i
@@ -66,21 +67,19 @@ end
 # Returns nothing.
 def selection(sel, num_players, person_arr)
   if sel == 1
-
     player_input(num_players, person_arr)
+    puts ' '
     puts '#############################################'
     puts 'Out of time! End of round'
     puts '#############################################'
     display_sorted_score(num_players, person_arr)
   elsif sel == 2
-    app = FXApp.new
-    GameMenu.new(app)
-    app.create
-    app.run
     person_arr = []
+    print 'Enter number of players (at least 2): '
+    num_players = gets.chomp.to_i
     num_players = pre_game_selection(person_arr,num_players)
-
     player_input(num_players, person_arr)
+    puts ' '
     puts '#############################################'
     puts 'Out of time! End of round'
     puts '#############################################'
@@ -97,7 +96,7 @@ end
 def game_menu
   sel = -1
   until sel.positive? && sel < 4
-    print '[1]: New round, [2]: New game, [3]: Quit: '
+    print '[2]: New game, [3]: Quit: '  #[1]: New round does not work with num_players
     sel = gets.to_i
   end
 
@@ -108,9 +107,9 @@ end
 person_arr = []
 print 'Enter number of players (at least 2): '
 num_players = gets.chomp.to_i
-
 pre_game_selection(person_arr, num_players)
 player_input(num_players, person_arr)
+puts ' '
 puts '#############################################'
 puts 'Out of time! End of round'
 puts '#############################################'
@@ -118,6 +117,7 @@ display_sorted_score(num_players, person_arr)
 
 # Edited 05/25/20 by Kevin: replaced While true with loop do
 loop do
+
   sel = game_menu
   selection(sel, num_players, person_arr)
 end
