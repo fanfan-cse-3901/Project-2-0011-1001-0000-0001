@@ -10,7 +10,7 @@ require './table_setting_script.rb'
 # TableSetting.print_table((0..80).to_a,'yeet we complete')
 # Test Begin
 describe SetVerify do
-  context 'When testing the SetGame is_set? methods' do
+  context 'When testing the SetVerify is_set? methods' do
     it "should say 'is set' when we call the is_set? method" do
       a = []
       message = SetVerify.set?
@@ -396,6 +396,32 @@ describe SetVerify do
       a = [53, 22, 8]
       is_set = SetVerify.is_set?(a)
       expect(is_set).to eq false
+    end
+
+    it 'should return true' do
+      a = [56, 57, 61]
+      is_set = SetVerify.is_set?(a)
+      expect(is_set).to eq true
+    end
+  end
+
+  context 'When testing the SetVerify find_set methods' do
+    it 'should return array' do
+      selections = []
+      set_list = SetVerify.find_set(selections)
+      expect(set_list).to be_instance_of(Array)
+    end
+
+    it 'should return array with valid sets and return false' do
+      selections = [0,1]
+      set_list = SetVerify.find_set(selections)
+      expect(set_list).to be_instance_of(Array)
+      set_list.each do |i|
+        test_set = [selections[0], selections[1], set_list[i]]
+        puts test_set
+        is_set = SetVerify.is_set?(test_set)
+        expect(is_set).to eq(true)
+      end
     end
   end
 end
