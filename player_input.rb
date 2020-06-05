@@ -9,6 +9,7 @@ require 'timeout'
 # Created 05/25/2020 by Amanda Cheng
 # Edited 05/29/2020 by Yifan Yao: remove debugging lines, interaction with main.rb
 # Edited 06/01/2020 by Amanda Cheng: added timer functionality set by user
+# Edited 06/05/2020 by Yifan Yao: Refactor codes
 class Player
   attr_accessor :player_num, :score
 
@@ -80,18 +81,18 @@ def player_input(num_players, person_arr)
   dealer = (0..80).to_a
   mode = mode_level
   time = 100
-  if mode == 'e'
-    time = 300
-  elsif mode == 'm'
-    time = 150
-  else
-    time = 10
-  end
+  time = if mode == 'e'
+           300
+         elsif mode == 'm'
+           150
+         else
+           10
+         end
 
   # This checks when deck is empty and no set from table
   continue_game = true
   first_time = true
-  #begin the timer
+  # begin the timer
   begin
     Timeout.timeout(time) do
       # Continue playing for the round until end game (when time is up)
@@ -128,7 +129,7 @@ def player_input(num_players, person_arr)
           end
         end
 
-        if SetVerify.is_set?([table[card[0]],table[card[1]],table[card[2]]])
+        if SetVerify.is_set?([table[card[0]], table[card[1]], table[card[2]]])
           # Output that it is a set and update score
           puts 'It is a set!'
           person_arr[num - 1].win_pts
@@ -154,7 +155,6 @@ def player_input(num_players, person_arr)
         end
       end
     end
-
   rescue Timeout::Error
   end
 end
@@ -170,17 +170,17 @@ end
 def cpu_input(num_players, person_arr)
   table = []
   dealer = (0..80).to_a
-  #Ask user for mode level to determine round time
+  # Ask user for mode level to determine round time
   mode = mode_level
   time = 100
-  if mode == 'e'
-    time = 300
-  elsif mode == 'm'
-    time = 150
-  else
-    time = 10
-  end
- 
+  time = if mode == 'e'
+           300
+         elsif mode == 'm'
+           150
+         else
+           10
+         end
+
   # This checks when deck is empty and no set from table
   continue_game = true
   first_time = true
@@ -220,7 +220,7 @@ def cpu_input(num_players, person_arr)
           end
         end
 
-        if SetVerify.is_set?([table[card[0]],table[card[1]],table[card[2]]])
+        if SetVerify.is_set?([table[card[0]], table[card[1]], table[card[2]]])
           # Output that it is a set and update score
           puts 'It is a set!'
           person_arr[num - 1].win_pts
@@ -246,17 +246,17 @@ def cpu_input(num_players, person_arr)
         end
       end
     end
-
   rescue Timeout::Error
   end
 end
 
-#Created 06/04/2020 by Amanda Cheng: Asks player to input mode level to determine time for round and types of hints
-def mode_level()
-  puts "Mode Level? (e/m/h): "
+# Created 06/04/2020 by Amanda Cheng: Asks player to input mode level to determine time for round and types of hints
+# Edited 06/05/2020 by Yifan Yao: Change `puts` to `print` to avoid extra escape sequences
+def mode_level
+  print 'Mode Level? (e/m/h): '
   mode = gets.chomp!
   valid_mode = false
-  while  !valid_mode
+  until valid_mode
     if mode == 'e'
       valid_mode = true
     elsif mode == 'm'
@@ -266,7 +266,7 @@ def mode_level()
 
       valid_mode = true
     else
-      print "Not valid mode! Try again: "
+      print 'Not valid mode! Try again: '
       mode = gets.chomp!
     end
   end
