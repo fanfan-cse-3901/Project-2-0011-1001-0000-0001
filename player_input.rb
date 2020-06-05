@@ -3,7 +3,7 @@
 # File created 05/25/2020 by Amanda Cheng
 require './set_verify.rb'
 require './table_setting_script.rb'
-require './generate_table_img.rb'
+require './gen_table_img.rb'
 require 'timeout'
 
 # Created 05/25/2020 by Amanda Cheng
@@ -101,7 +101,7 @@ def player_input(num_players, person_arr)
 
           TableSetting.set_table(table, dealer)
           first_time = false
-          generate_table_img(table)
+          gen_table_img(table)
         end
 
         print 'Input number of player who yells SET first: '
