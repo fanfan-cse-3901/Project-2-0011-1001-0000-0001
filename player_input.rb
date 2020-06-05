@@ -86,7 +86,7 @@ def player_input(num_players, person_arr)
   else
     time = 10
   end
-  TableSetting.get_level(mode)
+
   # This checks when deck is empty and no set from table
   continue_game = true
   first_time = true
@@ -169,7 +169,7 @@ end
 def cpu_input(num_players, person_arr)
   table = []
   dealer = (0..80).to_a
-
+  #Ask user for mode level to determine round time
   mode = mode_level
   time = 100
   if mode == 'e'
@@ -179,7 +179,7 @@ def cpu_input(num_players, person_arr)
   else
     time = 10
   end
-  TableSetting.get_level(mode)
+ 
   # This checks when deck is empty and no set from table
   continue_game = true
   first_time = true
@@ -269,5 +269,11 @@ def mode_level()
       mode = gets.chomp!
     end
   end
+  mode
+end
+
+# Created on 06/04/2020 by Amanda Cheng
+# To be called by other modules
+def level(mode)
   mode
 end
