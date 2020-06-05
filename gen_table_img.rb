@@ -26,5 +26,5 @@ def gen_table_img(table)
   # Write table_img into table.jpg and open it via default viewer
   table_img.append(true).write('table.jpg')
   file_to_open = './table.jpg'
-  system %(bash open "#{file_to_open}")
+  system %(bash xdg-open "#{file_to_open}")
 end
