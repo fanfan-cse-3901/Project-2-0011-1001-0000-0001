@@ -41,6 +41,7 @@ end
 # Created 05/25/2020 by Amanda Cheng
 # Edited 05/27/2020 by Kevin Dong: Added Documentation
 # Edited 06/03/2020 by Amanda Cheng: Rechanged the function
+# Edited 06/04/2020 by Kevin Dong: Added cpu_input support
 # Public: Initialize array of players. Assume at least 2
 #
 # person_arr - Array of Player objects to be populated.
@@ -49,7 +50,7 @@ end
 def pre_game_selection(person_arr, num_players)
   #print 'Enter number of players (at least 2): '
   # $num_players = gets.chomp.to_i
-  while num_players < 2
+  while num_players < 1
     print 'Invalid number, try again: '
     num_players = gets.chomp.to_i
   end
@@ -60,6 +61,7 @@ end
 
 # Created 05/26/2020 by Yifan Yao
 # Edited 05/27/2020 by Kevin Dong: Added Documentation
+# Edited 06/04/2020 by Kevin Dong: Added cpu_input support
 # Public: Handles player selection, round control, and score.
 #
 # sel - Integer that reflects game-state.
@@ -67,7 +69,8 @@ end
 # Returns nothing.
 def selection(sel, num_players, person_arr)
   if sel == 1
-    player_input(num_players, person_arr)
+    cpu_input(num_players, person_arr) if num_players == 1
+    player_input(num_players, person_arr) if num_players > 1
     puts ' '
     puts '#############################################'
     puts 'Out of time! End of round'
@@ -75,10 +78,11 @@ def selection(sel, num_players, person_arr)
     display_sorted_score(num_players, person_arr)
   elsif sel == 2
     person_arr = []
-    print 'Enter number of players (at least 2): '
+    print 'Enter number of players (1 for VS computer player): '
     num_players = gets.chomp.to_i
     num_players = pre_game_selection(person_arr,num_players)
-    player_input(num_players, person_arr)
+    cpu_input(num_players, person_arr) if num_players == 1
+    player_input(num_players, person_arr) if num_players > 1
     puts ' '
     puts '#############################################'
     puts 'Out of time! End of round'
@@ -103,12 +107,14 @@ def game_menu
   sel
 end
 
-
+# Edited 06/04/2020 by Kevin Dong: Added cpu_input support
 person_arr = []
-print 'Enter number of players (at least 2): '
+print 'Enter number of players (1 for VS computer player): '
 num_players = gets.chomp.to_i
 pre_game_selection(person_arr, num_players)
-player_input(num_players, person_arr)
+
+cpu_input(num_players, person_arr) if num_players == 1
+player_input(num_players, person_arr) if num_players > 1
 puts ' '
 puts '#############################################'
 puts 'Out of time! End of round'
