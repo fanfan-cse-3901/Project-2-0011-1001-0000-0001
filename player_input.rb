@@ -77,17 +77,16 @@ end
 def player_input(num_players, person_arr)
   table = []
   dealer = (0..80).to_a
-
-  puts " NUM PLAYERS IS #{num_players} "
-  print 'Do you want to set Game Round time? (y/n) '
-  ans = gets.chomp
-  if ans == 'y'
-    print 'Set Min Game Round Time (sec) greater than 0: '
-    time = gets.chomp.to_i
-  elsif ans == 'n'
-    time = 1 << 64 # Maximum bigNum
+  mode = mode_level
+  time = 100
+  if mode == 'e'
+    time = 300
+  elsif mode == 'm'
+    time = 150
+  else
+    time = 10
   end
-
+  TableSetting.get_level(mode)
   # This checks when deck is empty and no set from table
   continue_game = true
   first_time = true
@@ -98,6 +97,7 @@ def player_input(num_players, person_arr)
       while continue_game
         # Only want output table once because calling set_table later on
         if first_time
+
           TableSetting.set_table(table, dealer)
           first_time = false
 
@@ -170,16 +170,16 @@ def cpu_input(num_players, person_arr)
   table = []
   dealer = (0..80).to_a
 
-  puts " NUM PLAYERS IS #{num_players} "
-  print 'Do you want to set Game Round time? (y/n) '
-  ans = gets.chomp
-  if ans == 'y'
-    print 'Set Min Game Round Time (sec) greater than 0: '
-    time = gets.chomp.to_i
-  elsif ans == 'n'
-    time = 1 << 64 # Maximum bigNum
+  mode = mode_level
+  time = 100
+  if mode == 'e'
+    time = 300
+  elsif mode == 'm'
+    time = 150
+  else
+    time = 10
   end
-
+  TableSetting.get_level(mode)
   # This checks when deck is empty and no set from table
   continue_game = true
   first_time = true
@@ -248,4 +248,26 @@ def cpu_input(num_players, person_arr)
 
   rescue Timeout::Error
   end
+end
+
+#Created 06/04/2020 by Amanda Cheng: Asks player to input mode level to determine time for round and types of hints
+def mode_level()
+  puts "Mode Level? (e/m/h): "
+  mode = gets.chomp!
+  valid_mode = false
+  while  !valid_mode
+    if mode == 'e'
+      valid_mode = true
+    elsif mode == 'm'
+
+      valid_mode = true
+    elsif mode == 'h'
+
+      valid_mode = true
+    else
+      print "Not valid mode! Try again: "
+      mode = gets.chomp!
+    end
+  end
+  mode
 end
