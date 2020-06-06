@@ -52,15 +52,18 @@ module Hint
     shapes = %w[diamond squiggle oval]
     colors = %w[red green purple]
     shades = %w[solid striped open]
-    unless table.length.zero?
+    if !table.length.zero?
       sets = SetVerify.find_set(table)
       if sets.length.zero?
-        puts 'No sets are present on the table.'
+        str = 'No sets are present on the table.'
+        puts str
       else
-        puts "HINT: Find a card that makes a set with the cards #{numbers[(d[sets[0][0].to_i].num.to_i - 1)]}, #{shapes[(d[sets[0][0].to_i].shape.to_i - 1)]}, #{colors[(d[sets[0][0].to_i].color.to_i - 1)]}, #{shades[(d[sets[0][0].to_i].shade.to_i - 1)]} and #{numbers[(d[sets[0][1].to_i].num.to_i - 1)]}, #{shapes[(d[sets[0][1].to_i].shape.to_i - 1)]}, #{colors[(d[sets[0][1].to_i].color.to_i - 1)]}, #{shades[(d[sets[0][1].to_i].shade.to_i - 1)]}"
+        str = "HINT: Find a card that makes a set with the cards #{numbers[(d[sets[0][0].to_i].num.to_i - 1)]}, #{shapes[(d[sets[0][0].to_i].shape.to_i - 1)]}, #{colors[(d[sets[0][0].to_i].color.to_i - 1)]}, #{shades[(d[sets[0][0].to_i].shade.to_i - 1)]} and #{numbers[(d[sets[0][1].to_i].num.to_i - 1)]}, #{shapes[(d[sets[0][1].to_i].shape.to_i - 1)]}, #{colors[(d[sets[0][1].to_i].color.to_i - 1)]}, #{shades[(d[sets[0][1].to_i].shade.to_i - 1)]}."
+        puts str
       end
+    else
+       puts str
     end
-    puts str
     str
   end
 
