@@ -80,6 +80,8 @@ end
 def player_input(num_players, person_arr)
   table = []
   dealer = (0..80).to_a
+  puts 'DEBUG PURPOSE, DELETE LATER: '
+  puts "NUMBER OF PLAYERS IS #{num_players}"
   mode = mode_level
   time = 100
   time = if mode == 'e'
@@ -87,7 +89,7 @@ def player_input(num_players, person_arr)
          elsif mode == 'm'
            150
          else
-           10
+           60
          end
 
   # This checks when deck is empty and no set from table
@@ -130,7 +132,8 @@ def player_input(num_players, person_arr)
           end
         end
 
-        if SetVerify.is_set?([table[card[0]], table[card[1]], table[card[2]]])
+        if SetVerify.is_set? [table[card[0]], table[card[1]], table[card[2]]]
+
           # Output that it is a set and update score
           puts 'It is a set!'
           person_arr[num - 1].win_pts
@@ -158,7 +161,7 @@ def player_input(num_players, person_arr)
     end
   rescue Timeout::Error
   end
-end
+  end
 
 # Created 06/04/2020 by Kevin Dong
 # Edited 06/04/2020 by Troy Stein: Actual Functionality
@@ -170,10 +173,11 @@ end
 # person_arr - person array
 #
 # Returns nothing.
-def cpu_input(num_players, person_arr)
+def cpu_input(_num_players, person_arr)
   table = []
   dealer = (0..80).to_a
-  set_rem=0
+  set_rem = 0
+
   # Ask user for mode level to determine round time
   mode = mode_level
   time = 100
@@ -182,19 +186,22 @@ def cpu_input(num_players, person_arr)
          elsif mode == 'm'
            150
          else
-           10
+           60
+
          end
 
   # This checks when deck is empty and no set from table
   continue_game = true
   first_time = true
-  # begin the timer
+  # Notify the user that time has occurred
+  puts "#{time} seconds start now"
   begin
-    Timeout.timeout(time) do
+    Timeout.timeout time do
       # Continue playing for the round until end game (when time is up)
       while continue_game
         # Only want output table once because calling set_table later on
         if first_time
+
           TableSetting.set_table(table, dealer, mode)
           first_time = false
 
@@ -219,7 +226,7 @@ def cpu_input(num_players, person_arr)
           # Output that it is a set and update score
           puts 'It is a set!'
           person_arr[0].win_pts
-          set_rem+=1
+          set_rem += 1
           puts "Your Score: #{person_arr[0].current_pts}" # Outputs the player's score
           card_sort = card.sort
           # If is set, remove from table array
@@ -228,7 +235,7 @@ def cpu_input(num_players, person_arr)
           table.delete_at(card_sort[2] - 2)
 
           # Call set_table method from Prachiti to replace cards
-          TableSetting.set_table(table, dealer, mode)
+          TableSetting.set_table table, dealer, mode
 
           # Call method which tests if end of game (deck empty and no set on table)
           continue_game = false if dealer.empty? && !TableSetting.at_least_one_set?(table)
@@ -257,17 +264,15 @@ end
 # Created 06/04/2020 by Amanda Cheng: Asks player to input mode level to determine time for round and types of hints
 # Edited 06/05/2020 by Yifan Yao: Change `puts` to `print` to avoid extra escape sequences
 def mode_level
+  puts 'Model level: '
+  puts '[e]asy: time is 300 sec, helpful hints'
+  puts '[m]edium: time is 150 sec, useful hints'
+  puts '[h]ard: time is 60 sec, simple hints'
   print 'Mode Level? (e/m/h): '
   mode = gets.chomp!
   valid_mode = false
   until valid_mode
-    if mode == 'e'
-      valid_mode = true
-    elsif mode == 'm'
-
-      valid_mode = true
-    elsif mode == 'h'
-
+    if mode == 'e' || mode == 'm' || mode == 'h'
       valid_mode = true
     else
       print 'Not valid mode! Try again: '

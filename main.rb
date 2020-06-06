@@ -17,9 +17,7 @@ def create_array(num_players, person_arr)
   (0...num_players).each do |n|
     person_arr[n] = Player.new(n + 1)
   end
-  if num_players == 1
-    person_arr[1] = CPU.new(2)
-  end
+  person_arr[1] = CPU.new(2) if num_players == 1
   person_arr
 end
 
@@ -32,9 +30,7 @@ def display_sorted_score(num_players, person_arr)
   (0...num_players).each do |n|
     player_summary.store(person_arr[n].player_num, person_arr[n].score)
   end
-  if num_players == 1
-    player_summary.store(person_arr[1].cpu_num,person_arr[1].score)
-  end
+  player_summary.store(person_arr[1].cpu_num, person_arr[1].score) if num_players == 1
   player_summary = player_summary.sort_by { |_k, v| -v }.to_h
   puts 'Leaderboard'
   player_summary.each do |i|
@@ -51,8 +47,8 @@ end
 # person_arr - Array of Player objects to be populated.
 #
 # Returns number of players.
-def pre_game_selection(person_arr, num_players)
-  #print 'Enter number of players (at least 2): '
+def pre_game_selection person_arr, num_players
+  # print 'Enter number of players (at least 2): '
   # $num_players = gets.chomp.to_i
   while num_players < 1
     print 'Invalid number, try again: '
@@ -71,8 +67,8 @@ end
 # sel - Integer that reflects game-state.
 #
 # Returns nothing.
-def selection(sel, num_players, person_arr)
-  if sel == 1
+def selection sel, num_players, person_arr
+  if sel == 1 # New Round
     cpu_input(num_players, person_arr) if num_players == 1
     player_input(num_players, person_arr) if num_players > 1
     puts ' '
@@ -80,11 +76,11 @@ def selection(sel, num_players, person_arr)
     puts 'Out of time! End of round'
     puts '#############################################'
     display_sorted_score(num_players, person_arr)
-  elsif sel == 2
+  elsif sel == 2 # New Game
     person_arr = []
     print 'Enter number of players (1 for VS computer player): '
     num_players = gets.chomp.to_i
-    num_players = pre_game_selection(person_arr,num_players)
+    num_players = pre_game_selection(person_arr, num_players)
     cpu_input(num_players, person_arr) if num_players == 1
     player_input(num_players, person_arr) if num_players > 1
     puts ' '
@@ -104,7 +100,7 @@ end
 def game_menu
   sel = -1
   until sel.positive? && sel < 4
-    print '[1] New Round, [2]: New game, [3]: Quit: '  #[1]: New round does not work with num_players
+    print '[1]: New round [2]: New game, [3]: Quit: ' # [1]: New round does not work with num_players
     sel = gets.to_i
   end
 
@@ -127,7 +123,6 @@ display_sorted_score(num_players, person_arr)
 
 # Edited 05/25/20 by Kevin: replaced While true with loop do
 loop do
-
   sel = game_menu
   selection(sel, num_players, person_arr)
 end
