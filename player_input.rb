@@ -77,6 +77,7 @@ end
 def player_input(num_players, person_arr)
   table = []
   dealer = (0..80).to_a
+  puts "DEBUG PURPOSE, DELETE LATER: "
   puts "NUMBER OF PLAYERS IS #{num_players}"
   mode = mode_level
   time = 100
@@ -140,7 +141,7 @@ def player_input(num_players, person_arr)
           table.delete_at(card_sort[2] - 2)
 
           # Call set_table method from Prachiti to replace cards
-          TableSetting.set_table(table, dealer)
+          TableSetting.set_table(table, dealer, mode)
 
           # Call method which tests if end of game (deck empty and no set on table)
           continue_game = false if dealer.empty? && !TableSetting.at_least_one_set?(table)
@@ -232,7 +233,7 @@ def cpu_input(num_players, person_arr)
           table.delete_at(card_sort[2] - 2)
 
           # Call set_table method from Prachiti to replace cards
-          TableSetting.set_table(table, dealer)
+          TableSetting.set_table(table, dealer, mode)
 
           # Call method which tests if end of game (deck empty and no set on table)
           continue_game = false if dealer.empty? && !TableSetting.at_least_one_set?(table)
@@ -264,11 +265,5 @@ def mode_level
       mode = gets.chomp!
     end
   end
-  mode
-end
-
-# Created on 06/04/2020 by Amanda Cheng
-# To be called by other modules
-def level(mode)
   mode
 end
