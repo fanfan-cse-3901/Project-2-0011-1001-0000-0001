@@ -58,6 +58,7 @@ module TableSetting
     # Prints out each card on the table
     gen_table_img(table)
     unless table.length.zero?
+      puts
       table.each_index { |n| puts "#{n + 1}: #{numbers[(d[table[n].to_i].num.to_i - 1)]}, #{shapes[(d[table[n].to_i].shape.to_i - 1)]}, #{colors[(d[table[n].to_i].color.to_i - 1)]}, #{shades[(d[table[n].to_i].shade.to_i - 1)]}" }
     end
     puts message
