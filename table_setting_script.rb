@@ -3,7 +3,7 @@
 require_relative './set_verify.rb'
 require_relative './set_setup.rb'
 require_relative './hint_generator.rb'
-require_relative './player_input.rb'
+require_relative './gen_table_img.rb'
 
 # This modules contains methods to set up the table correctly.
 # Call TableSetting.set_table from this module
@@ -14,6 +14,7 @@ require_relative './player_input.rb'
 # Edited on 6/1/2020 by Prachiti Garge: Changed the way deck is accessed according to set_setup new version.
 # Edited 06/03/2020 by Kevin Dong: Continued fixes to resume functionality + Documentation.
 # Edited on 6/4/2020 by Prachiti Garge: Debugged the module and made provisions to show hints.
+# Edited on 6/5/2020 by Prachiti Garge: Added gui call to visually present table.
 module TableSetting
 
   include SetVerify
@@ -47,25 +48,26 @@ module TableSetting
   #
   # Created on 5/26/2020 by Prachiti Garge
   # Edited on 6/4/2020 by Prachiti Garge: Added difficulty level appropriate hints to the table
-  def self.print_table(table, message)
+  # Edited on 6/5/2020 by Prachiti Garge: Added GUI call and corrected hint calling.
+  def self.print_table(table, message, level)
     d = cardone # Gets the deck
-    lev = level
     numbers = %w[one two three]
     shapes = %w[diamond squiggle oval]
     colors = %w[red green purple]
     shades = %w[solid striped open]
     # Prints out each card on the table
+    gen_table_img(table)
     unless table.length.zero?
       table.each_index { |n| puts "#{n + 1}: #{numbers[(d[table[n].to_i].num.to_i - 1)]}, #{shapes[(d[table[n].to_i].shape.to_i - 1)]}, #{colors[(d[table[n].to_i].color.to_i - 1)]}, #{shades[(d[table[n].to_i].shade.to_i - 1)]}" }
     end
     puts message
     puts
-    if lev == 'e'
-      puts "HINT: #{Hint.generate_hint_easy(table)}"
-    elsif lev == 'm'
-      puts "HINT: #{Hint.generate_hint_medium(table)}"
+    if level == 'e'
+      Hint.generate_hint_easy(table)
+    elsif level == 'm'
+      Hint.generate_hint_medium(table)
     else
-      puts "HINT: #{Hint.generate_hint_difficult(table)}"
+      Hint.generate_hint_difficult(table)
     end
     puts
     true
@@ -77,7 +79,7 @@ module TableSetting
   #
   # Created on 5/26/2020 by Prachiti Garge
   # Edited on 6/4/2020 by Prachiti Garge: Changed output for testing, added parameter to generate hint based on difficulty level
-  def self.set_table(table, dealer)
+  def self.set_table(table, dealer, level)
     # Default message
     message = []
 
@@ -94,9 +96,10 @@ module TableSetting
     message.push('Extra cards were dealt to ensure presence of at least one set.') if table.length > 12
     message.push('There are no more cards left to deal.') if dealer.length.zero?
     # Print out the table and message
-    ret_print = print_table(table, message)
+    ret_print = print_table(table, message, level)
     # For testing, I will return a boolean to check if cards are printed.
     ret_print
   end
 
 end
+

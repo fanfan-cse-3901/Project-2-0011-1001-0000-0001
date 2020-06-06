@@ -2,7 +2,7 @@
 
 require_relative './set_verify.rb'
 require_relative './set_setup.rb'
-# require_relative './table_setting_script.rb'
+
 
 # Provides methods to generate hints.
 # All methods are module methods and should be called on the Hint module.
@@ -15,7 +15,6 @@ require_relative './set_setup.rb'
 # Edited on 6/1/2020 by Prachiti Garge
 module Hint
 
-  d = cardone
   # Generates hint to show number of sets on table.
   #
   # table - Array with keys referring to cards.
@@ -34,7 +33,7 @@ module Hint
         end
       end
     end
-    str = "The number of sets present on the table are: #{val}"
+    str = "HINT: The number of sets present on the table are: #{val}"
     puts str
     str
   end
@@ -45,10 +44,22 @@ module Hint
   #
   # Returns number of sets consisting a card.
   # Created on 6/1/2020 by Prachiti Garge
-  # Edited on 6/4/2020 by Prachiti Garge: Renamed and implemented the easy version
+  # Edited on 6/5/2020 by Prachiti Garge: Renamed and implemented the easy version
   def self.generate_hint_easy(table)
+    d = cardone
     str = 'No cards are present on the table.'
-    sets
+    numbers = %w[one two three]
+    shapes = %w[diamond squiggle oval]
+    colors = %w[red green purple]
+    shades = %w[solid striped open]
+    unless table.length.zero?
+      sets = SetVerify.find_set(table)
+      if sets.length.zero?
+        puts 'No sets are present on the table.'
+      else
+        puts "HINT: Find a card that makes a set with the cards #{numbers[(d[sets[0][0].to_i].num.to_i - 1)]}, #{shapes[(d[sets[0][0].to_i].shape.to_i - 1)]}, #{colors[(d[sets[0][0].to_i].color.to_i - 1)]}, #{shades[(d[sets[0][0].to_i].shade.to_i - 1)]} and #{numbers[(d[sets[0][1].to_i].num.to_i - 1)]}, #{shapes[(d[sets[0][1].to_i].shape.to_i - 1)]}, #{colors[(d[sets[0][1].to_i].color.to_i - 1)]}, #{shades[(d[sets[0][1].to_i].shade.to_i - 1)]}"
+      end
+    end
     puts str
     str
   end
@@ -60,23 +71,24 @@ module Hint
   # Prints out info about two attributes of a set present on the table.
   # Created on 6/4/2020 by Prachiti Garge
   def self.generate_hint_medium(table)
+    d = cardone
     str = 'No cards are present on the table.'
-    if table.!empty?
+    unless table.length.zero?
       set_list = SetVerify.find_set table
-      if set_list.empty?
+      if set_list.length.zero?
         str = 'No sets are present on the table.'
       else
         set = set_list[0]
         num_same = d[set[0]].num == d[set[1]].num
         color_same = d[set[0]].color == d[set[1]].color
         str = if num_same && color_same
-                'There is a set which has the same number and same color.'
+                'HINT: There is a set which has the same number and same color.'
               elsif !num_same && color_same
-                'There is a set which has all different numbers and same color.'
+                'HINT: There is a set which has all different numbers and same color.'
               elsif num_same && !color_same
-                'There is a set which has the same number and all different colors.'
+                'HINT: There is a set which has the same number and all different colors.'
               else
-                'There is a set which has all different numbers and all different colors.'
+                'HINT: There is a set which has all different numbers and all different colors.'
               end
          end
     end

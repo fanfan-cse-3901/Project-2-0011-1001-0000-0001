@@ -76,6 +76,7 @@ end
 # Edited 05/26/2020 by Yifan Yao: replace redundant codes by using a loop, change of implementation notified to all
 # Edited on 06/03/2020 by Kevin Dong: Important implementation to enable functionality again after set_setup changes.
 # Edited on 06/04/2020 by Amanda Cheng: Updated timer so that it automatically terminates code and does not need to wait for user to input anything
+# Edited on 6/5/2020 by Prachiti Garge: Updated call to TableSetting.set_table.
 def player_input(num_players, person_arr)
   table = []
   dealer = (0..80).to_a
@@ -100,7 +101,7 @@ def player_input(num_players, person_arr)
         # Only want output table once because calling set_table later on
         if first_time
 
-          TableSetting.set_table(table, dealer)
+          TableSetting.set_table(table, dealer, mode)
           first_time = false
           gen_table_img(table)
         end
@@ -141,7 +142,7 @@ def player_input(num_players, person_arr)
           table.delete_at(card_sort[2] - 2)
 
           # Call set_table method from Prachiti to replace cards
-          TableSetting.set_table(table, dealer)
+          TableSetting.set_table(table, dealer, mode)
 
           # Call method which tests if end of game (deck empty and no set on table)
           continue_game = false if dealer.empty? && !TableSetting.at_least_one_set?(table)
@@ -161,6 +162,7 @@ end
 
 # Created 06/04/2020 by Kevin Dong
 # Edited 06/04/2020 by Troy Stein: Actual Functionality
+# Edited on 6/5/2020 by Prachiti Garge: Updated call to TableSetting.set_table.
 # Public: Process for 1 v 1 game
 #
 # num_players - should be 1 for 1 player
@@ -191,7 +193,7 @@ def cpu_input(num_players, person_arr)
       while continue_game
         # Only want output table once because calling set_table later on
         if first_time
-          TableSetting.set_table(table, dealer)
+          TableSetting.set_table(table, dealer, mode)
           first_time = false
 
         end
@@ -232,7 +234,7 @@ def cpu_input(num_players, person_arr)
           table.delete_at(card_sort[2] - 2)
 
           # Call set_table method from Prachiti to replace cards
-          TableSetting.set_table(table, dealer)
+          TableSetting.set_table(table, dealer, mode)
 
           # Call method which tests if end of game (deck empty and no set on table)
           continue_game = false if dealer.empty? && !TableSetting.at_least_one_set?(table)
@@ -270,11 +272,5 @@ def mode_level
       mode = gets.chomp!
     end
   end
-  mode
-end
-
-# Created on 06/04/2020 by Amanda Cheng
-# To be called by other modules
-def level(mode)
   mode
 end
