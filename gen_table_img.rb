@@ -27,4 +27,5 @@ def gen_table_img(table)
   table_img.append(true).write('table.jpg')
   file_to_open = './table.jpg'
   system %(xdg-open "#{file_to_open}")
+  puts 'Please resize the table if needed!'
 end
