@@ -17,7 +17,9 @@ def create_array(num_players, person_arr)
   (0...num_players).each do |n|
     person_arr[n] = Player.new(n + 1)
   end
-
+  if num_players == 1
+    person_arr[1] = CPU.new(2)
+  end
   person_arr
 end
 
@@ -30,7 +32,9 @@ def display_sorted_score(num_players, person_arr)
   (0...num_players).each do |n|
     player_summary.store(person_arr[n].player_num, person_arr[n].score)
   end
-
+  if num_players == 1
+    player_summary.store(person_arr[1].cpu_num,person_arr[1].score)
+  end
   player_summary = player_summary.sort_by { |_k, v| -v }.to_h
   puts 'Leaderboard'
   player_summary.each do |i|
@@ -100,7 +104,7 @@ end
 def game_menu
   sel = -1
   until sel.positive? && sel < 4
-    print '[2]: New game, [3]: Quit: '  #[1]: New round does not work with num_players
+    print '[1] New Round, [2]: New game, [3]: Quit: '  #[1]: New round does not work with num_players
     sel = gets.to_i
   end
 
