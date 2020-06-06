@@ -68,15 +68,7 @@ end
 #
 # Returns nothing.
 def selection sel, num_players, person_arr
-  if sel == 1 # New Round
-    cpu_input(num_players, person_arr) if num_players == 1
-    player_input(num_players, person_arr) if num_players > 1
-    puts ' '
-    puts '#############################################'
-    puts 'Out of time! End of round'
-    puts '#############################################'
-    display_sorted_score(num_players, person_arr)
-  elsif sel == 2 # New Game
+  if sel == 1 || sel == 2
     cpu_input(num_players, person_arr) if num_players == 1
     player_input(num_players, person_arr) if num_players > 1
     puts ' '
