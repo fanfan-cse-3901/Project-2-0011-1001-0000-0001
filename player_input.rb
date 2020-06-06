@@ -162,7 +162,8 @@ end
 
 # Created 06/04/2020 by Kevin Dong
 # Edited 06/04/2020 by Troy Stein: Actual Functionality
-# Edited on 6/5/2020 by Prachiti Garge: Updated call to TableSetting.set_table.
+# Edited on 06/05/2020 by Prachiti Garge: Updated call to TableSetting.set_table.
+# Edited 06/04/2020 by Troy Stein: Implemented the CPU part into the method
 # Public: Process for 1 v 1 game
 #
 # num_players - should be 1 for 1 player
@@ -172,6 +173,7 @@ end
 def cpu_input(num_players, person_arr)
   table = []
   dealer = (0..80).to_a
+  set_rem=0
   # Ask user for mode level to determine round time
   mode = mode_level
   time = 100
@@ -197,17 +199,8 @@ def cpu_input(num_players, person_arr)
           first_time = false
 
         end
-
-        print 'Input number of player who yells SET first: '
-        num = gets.to_i
-
-        # Check if player inputted valid number
-        while (num > num_players) || (num <= 0)
-          puts 'Invalid player number. Try again'
-          print 'Input number of player who yells SET first: '
-          num = gets.to_i
-
-        end
+        print 'Press Enter to Call set: '
+        num = gets.chomp
 
         num_cards_table = table.length # Debug purpose say is 12 for now
         puts "Player #{num}: Pick a set of 3 cards. Type the card # between #{1..num_cards_table}"
@@ -225,8 +218,9 @@ def cpu_input(num_players, person_arr)
         if SetVerify.is_set?([table[card[0]], table[card[1]], table[card[2]]])
           # Output that it is a set and update score
           puts 'It is a set!'
-          person_arr[num - 1].win_pts
-          puts "Player #{num}'s Score: #{person_arr[num - 1].current_pts}" # Outputs the player's score
+          person_arr[0].win_pts
+          set_rem+=1
+          puts "Your Score: #{person_arr[0].current_pts}" # Outputs the player's score
           card_sort = card.sort
           # If is set, remove from table array
           table.delete_at(card_sort[0])
@@ -241,14 +235,22 @@ def cpu_input(num_players, person_arr)
         else
           # If not a set, output that it is not a set and update score
           puts 'Not a set!'
-          person_arr[num - 1].lose_pts
-          puts "Player #{num}'s Score: #{person_arr[num - 1].current_pts}" # Outputs the player's score
-          puts ''
+          person_arr[0].lose_pts
+          puts "Your Score: #{person_arr[0].current_pts}" # Outputs the player's score
 
         end
       end
     end
   rescue Timeout::Error
+    if set_rem == 0
+      sets = SetVerify.find_set(table)
+      table.delete_at(sets[0][0])
+      table.delete_at(sets[0][1])
+      table.delete_at(sets[0][2])
+      person_arr[1].win_pts
+      puts "CPU's Score: #{person_arr[1].current_pts}" # Outputs the player's score
+      puts ''
+    end
   end
 end
 
