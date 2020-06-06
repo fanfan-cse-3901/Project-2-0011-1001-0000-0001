@@ -77,22 +77,22 @@ end
 def player_input(num_players, person_arr)
   table = []
   dealer = (0..80).to_a
-  puts "DEBUG PURPOSE, DELETE LATER: "
+  puts 'DEBUG PURPOSE, DELETE LATER: '
   puts "NUMBER OF PLAYERS IS #{num_players}"
   mode = mode_level
   time = 100
-  if mode == 'e'
-    time = 300
-  elsif mode == 'm'
-    time = 150
-  else
-    time = 10
+  time = if mode == 'e'
+           300
+         elsif mode == 'm'
+           150
+         else
+           10
   end
 
   # This checks when deck is empty and no set from table
   continue_game = true
   first_time = true
-  #begin the timer
+  # begin the timer
   begin
     Timeout.timeout(time) do
       # Continue playing for the round until end game (when time is up)
@@ -129,7 +129,7 @@ def player_input(num_players, person_arr)
           end
         end
 
-        if SetVerify.is_set?([table[card[0]],table[card[1]],table[card[2]]])
+        if SetVerify.is_set? [table[card[0]], table[card[1]], table[card[2]]]
           # Output that it is a set and update score
           puts 'It is a set!'
           person_arr[num - 1].win_pts
@@ -155,7 +155,6 @@ def player_input(num_players, person_arr)
         end
       end
     end
-
   rescue Timeout::Error
   end
 end
@@ -171,28 +170,29 @@ end
 def cpu_input(num_players, person_arr)
   table = []
   dealer = (0..80).to_a
-  #Ask user for mode level to determine round time
+  # Ask user for mode level to determine round time
   mode = mode_level
   time = 100
-  if mode == 'e'
-    time = 300
-  elsif mode == 'm'
-    time = 150
-  else
-    time = 10
+  time = if mode == 'e'
+           300
+         elsif mode == 'm'
+           150
+         else
+           10
   end
 
   # This checks when deck is empty and no set from table
   continue_game = true
   first_time = true
-  # begin the timer
+  # Notify the user that time has occurred
+  puts "#{time} seconds start now"
   begin
-    Timeout.timeout(time) do
+    Timeout.timeout time do
       # Continue playing for the round until end game (when time is up)
       while continue_game
         # Only want output table once because calling set_table later on
         if first_time
-          TableSetting.set_table(table, dealer)
+          TableSetting.set_table table, dealer, mode
           first_time = false
 
         end
@@ -201,7 +201,7 @@ def cpu_input(num_players, person_arr)
         num = gets.to_i
 
         # Check if player inputted valid number
-        while (num > num_players) || (num <= 0)
+        while num > num_players || num <= 0
           puts 'Invalid player number. Try again'
           print 'Input number of player who yells SET first: '
           num = gets.to_i
@@ -221,7 +221,7 @@ def cpu_input(num_players, person_arr)
           end
         end
 
-        if SetVerify.is_set?([table[card[0]],table[card[1]],table[card[2]]])
+        if SetVerify.is_set?([table[card[0]], table[card[1]], table[card[2]]])
           # Output that it is a set and update score
           puts 'It is a set!'
           person_arr[num - 1].win_pts
@@ -233,7 +233,7 @@ def cpu_input(num_players, person_arr)
           table.delete_at(card_sort[2] - 2)
 
           # Call set_table method from Prachiti to replace cards
-          TableSetting.set_table(table, dealer, mode)
+          TableSetting.set_table table, dealer, mode
 
           # Call method which tests if end of game (deck empty and no set on table)
           continue_game = false if dealer.empty? && !TableSetting.at_least_one_set?(table)
@@ -247,21 +247,24 @@ def cpu_input(num_players, person_arr)
         end
       end
     end
-
   rescue Timeout::Error
   end
 end
 
-#Created 06/04/2020 by Amanda Cheng: Asks player to input mode level to determine time for round and types of hints
+# Created 06/04/2020 by Amanda Cheng: Asks player to input mode level to determine time for round and types of hints
 def mode_level
-  puts "Mode Level? (e/m/h): "
-  mode = gets.chomp!
+  puts 'Model level: '
+  puts '[e]asy: time is 300 sec, helpful hints'
+  puts '[m]edium: time is 150 sec, useful hints'
+  puts '[h]ard: time is 50 sec, simple hints'
+  print 'Mode Level? (e/m/h): '
+  mode = gets
   valid_mode = false
-  while  !valid_mode
+  until valid_mode
     if mode == 'e' || mode == 'm' || mode == 'h'
       valid_mode = true
     else
-      print "Not valid mode! Try again: "
+      print 'Not valid mode! Try again: '
       mode = gets.chomp!
     end
   end
