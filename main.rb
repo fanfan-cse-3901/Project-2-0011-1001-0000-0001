@@ -100,7 +100,7 @@ end
 def game_menu
   sel = -1
   until sel.positive? && sel < 4
-    print '[2]: New game, [3]: Quit: '  #[1]: New round does not work with num_players
+    print '[1]: New round [2]: New game, [3]: Quit: '  #[1]: New round does not work with num_players
     sel = gets.to_i
   end
 

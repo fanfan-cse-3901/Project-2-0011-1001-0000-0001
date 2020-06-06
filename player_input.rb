@@ -77,6 +77,7 @@ end
 def player_input(num_players, person_arr)
   table = []
   dealer = (0..80).to_a
+  puts "NUMBER OF PLAYERS IS #{num_players}"
   mode = mode_level
   time = 100
   if mode == 'e'
@@ -179,7 +180,7 @@ def cpu_input(num_players, person_arr)
   else
     time = 10
   end
- 
+
   # This checks when deck is empty and no set from table
   continue_game = true
   first_time = true
@@ -251,18 +252,12 @@ def cpu_input(num_players, person_arr)
 end
 
 #Created 06/04/2020 by Amanda Cheng: Asks player to input mode level to determine time for round and types of hints
-def mode_level()
+def mode_level
   puts "Mode Level? (e/m/h): "
   mode = gets.chomp!
   valid_mode = false
   while  !valid_mode
-    if mode == 'e'
-      valid_mode = true
-    elsif mode == 'm'
-
-      valid_mode = true
-    elsif mode == 'h'
-
+    if mode == 'e' || mode == 'm' || mode == 'h'
       valid_mode = true
     else
       print "Not valid mode! Try again: "
