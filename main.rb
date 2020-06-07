@@ -54,7 +54,7 @@ def pre_game_selection person_arr, num_players
     print 'Invalid number, try again: '
     num_players = gets.chomp.to_i
   end
-  create_array(num_players, person_arr)
+  create_array num_players, person_arr
 
   num_players
 end
