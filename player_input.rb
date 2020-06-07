@@ -77,10 +77,10 @@ end
 # Edited on 06/03/2020 by Kevin Dong: Important implementation to enable functionality again after set_setup changes.
 # Edited on 06/04/2020 by Amanda Cheng: Updated timer so that it automatically terminates code and does not need to wait for user to input anything
 # Edited on 6/5/2020 by Prachiti Garge: Updated call to TableSetting.set_table.
+# Edited on 6/6/2020 by Prachiti Garge: Deleted print Debugging statement in the final draft.
 def player_input(num_players, person_arr)
   table = []
   dealer = (0..80).to_a
-  puts 'DEBUG PURPOSE, DELETE LATER: '
   puts "NUMBER OF PLAYERS IS #{num_players}"
   mode = mode_level
   time = 100
