@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 # File created 06/05/2020 by Yifan Yao
+=begin
+Generates an image of the current table.
+=end
 require 'rmagick'
 
 include Magick
