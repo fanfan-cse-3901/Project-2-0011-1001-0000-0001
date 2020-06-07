@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 # File created 05/25/2020 by Yifan Yao
+=begin
+main.rb starts the game with game menu selections and asks users for basic infor such as number of players,
+whether they want new game, quit, or new round after their current game.
+=end
 load 'player_input.rb'
 require 'timeout'
 # Created 05/25/2020 by Amanda Cheng

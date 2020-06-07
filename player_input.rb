@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
 # File created 05/25/2020 by Amanda Cheng
-# player_input asks for user of difficulty level and times the game based on level. It calls other methods that display the
+=begin
+player_input asks for user of difficulty level and times the game based on level.
+It calls other methods that display the table the cards both on console and in a pop up window
+and calls the method that tests if the 3 cards the user(s) selected is set and
+adds or minus score to each player. It also holds the version for CPU player and the user.
+=end
 require './set_verify.rb'
 require './table_setting_script.rb'
 require './gen_table_img.rb'
