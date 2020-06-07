@@ -77,6 +77,12 @@ end
 # Edited on 06/03/2020 by Kevin Dong: Important implementation to enable functionality again after set_setup changes.
 # Edited on 06/04/2020 by Amanda Cheng: Updated timer so that it automatically terminates code and does not need to wait for user to input anything
 # Edited on 6/5/2020 by Prachiti Garge: Updated call to TableSetting.set_table.
+# Public: Process for multiplayer game
+#
+# num_players - should be number of players in game
+# person_arr - person array at least 2
+#
+# Returns nothing.
 def player_input(num_players, person_arr)
   table = []
   dealer = (0..80).to_a
@@ -97,30 +103,30 @@ def player_input(num_players, person_arr)
   first_time = true
   # begin the timer
   begin
-    Timeout.timeout(time) do
+    Timeout.timeout time do
       # Continue playing for the round until end game (when time is up)
       while continue_game
         # Only want output table once because calling set_table later on
         if first_time
-          TableSetting.set_table(table, dealer, mode)
+          TableSetting.set_table table, dealer, mode
           first_time = false
         end
         print 'Input number of player who yells SET first: '
         num = gets.to_i
         # Check if player inputted valid number
-        while (num > num_players) || (num <= 0)
+        while num > num_players || num <= 0
           puts 'Invalid player number. Try again'
           print 'Input number of player who yells SET first: '
           num = gets.to_i
         end
-        num_cards_table = table.length # Debug purpose say is 12 for now
+        num_cards_table = table.length
         puts "Player #{num}: Pick a set of 3 cards. Type the card # between #{1..num_cards_table}"
         # Now obtain the 3 cards and match it with the cards on Table
         card = [-1, -2, -3]
         (1..3).each do |i|
           print "Card #{i}: "
           card[i - 1] = gets.to_i - 1
-          while (card[i - 1] >= num_cards_table) || card[i - 1].negative? || (card[2] == card[0]) || (card[2] == card[1])
+          while card[i - 1] >= num_cards_table || card[i - 1].negative? || card[2] == card[0] || card[2] == card[1]
             print 'Card not valid. Try again: '
             card[i - 1] = gets.to_i - 1
           end
@@ -132,11 +138,11 @@ def player_input(num_players, person_arr)
           puts "Player #{num}'s Score: #{person_arr[num - 1].current_pts}" # Outputs the player's score
           card_sort = card.sort
           # If is set, remove from table array
-          table.delete_at(card_sort[0])
-          table.delete_at(card_sort[1] - 1)
-          table.delete_at(card_sort[2] - 2)
+          table.delete_at card_sort[0]
+          table.delete_at card_sort[1] - 1
+          table.delete_at card_sort[2] - 2
           # Call set_table method from Prachiti to replace cards
-          TableSetting.set_table(table, dealer, mode)
+          TableSetting.set_table table, dealer, mode
           # Call method which tests if end of game (deck empty and no set on table)
           continue_game = false if dealer.empty? && !TableSetting.at_least_one_set?(table)
         else
@@ -194,7 +200,7 @@ def cpu_input(_num_players, person_arr)
         # Only want output table once because calling set_table later on
         if first_time
 
-          TableSetting.set_table(table, dealer, mode)
+          TableSetting.set_table table, dealer, mode
           first_time = false
 
         end
@@ -203,30 +209,30 @@ def cpu_input(_num_players, person_arr)
             print 'Press Enter to Call set: '
             num = gets.chomp
 
-            num_cards_table = table.length # Debug purpose say is 12 for now
+            num_cards_table = table.length
             puts "Player #{num}: Pick a set of 3 cards. Type the card # between #{1..num_cards_table}"
             # Now obtain the 3 cards and match it with the cards on Table
             card = [-1, -2, -3]
             (1..3).each do |i|
               print "Card #{i}: "
               card[i - 1] = gets.to_i - 1
-              while (card[i - 1] >= num_cards_table) || card[i - 1].negative? || (card[2] == card[0]) || (card[2] == card[1])
+              while card[i - 1] >= num_cards_table || card[i - 1].negative? || card[2] == card[0] || card[2] == card[1]
                 print 'Card not valid. Try again: '
                 card[i - 1] = gets.to_i - 1
               end
             end
 
             # Decision Verification
-            if SetVerify.is_set?([table[card[0]], table[card[1]], table[card[2]]])
+            if SetVerify.is_set? [table[card[0]], table[card[1]], table[card[2]]]
               # Output that it is a set and update score
               puts 'It is a set!'
               person_arr[0].win_pts
               puts "Your Score: #{person_arr[0].current_pts}" # Outputs the player's score
               card_sort = card.sort
               # If is set, remove from table array
-              table.delete_at(card_sort[0])
-              table.delete_at(card_sort[1] - 1)
-              table.delete_at(card_sort[2] - 2)
+              table.delete_at card_sort[0]
+              table.delete_at card_sort[1] - 1
+              table.delete_at card_sort[2] - 2
 
               # Call set_table method from Prachiti to replace cards
               TableSetting.set_table table, dealer, mode
@@ -242,10 +248,10 @@ def cpu_input(_num_players, person_arr)
             end
           end
         rescue Timeout::Error
-          sets = SetVerify.find_set(table)
-          table.delete(sets[0][0])
-          table.delete(sets[0][1])
-          table.delete(sets[0][2])
+          sets = SetVerify.find_set table
+          table.delete sets[0][0]
+          table.delete sets[0][1]
+          table.delete sets[0][2]
           puts
           TableSetting.set_table table, dealer, mode
           person_arr[1].win_pts
@@ -259,8 +265,11 @@ def cpu_input(_num_players, person_arr)
   end
 end
 
-# Created 06/04/2020 by Amanda Cheng: Asks player to input mode level to determine time for round and types of hints
+# Created 06/04/2020 by Amanda Cheng:
 # Edited 06/05/2020 by Yifan Yao: Change `puts` to `print` to avoid extra escape sequences
+# Public: Asks player to input mode level to determine time for round and types of hints.
+#
+# Returns Mode.
 def mode_level
   puts 'Model level: '
   puts '[e]asy: time is 300 sec, helpful hints'

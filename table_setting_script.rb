@@ -31,7 +31,7 @@ module TableSetting
       (0...(table.length - 2)).each do |i|
         ((i + 1)...(table.length - 1)).each do |j|
           ((j + 1)...table.length).each do |k|
-            val = true if SetVerify.is_set?([table[i], table[j], table[k]])
+            val = true if SetVerify.is_set? [table[i], table[j], table[k]]
             break if val
           end
           break if val
@@ -56,19 +56,21 @@ module TableSetting
     colors = %w[red green purple]
     shades = %w[solid striped open]
     # Prints out each card on the table
-    gen_table_img(table)
+    gen_table_img table
     unless table.length.zero?
       puts
-      table.each_index { |n| puts "#{n + 1}: #{numbers[(d[table[n].to_i].num.to_i - 1)]}, #{shapes[(d[table[n].to_i].shape.to_i - 1)]}, #{colors[(d[table[n].to_i].color.to_i - 1)]}, #{shades[(d[table[n].to_i].shade.to_i - 1)]}" }
+      table.each_index do |n|
+        puts "#{n + 1}: #{numbers[(d[table[n].to_i].num.to_i - 1)]}, #{shapes[(d[table[n].to_i].shape.to_i - 1)]}, #{colors[(d[table[n].to_i].color.to_i - 1)]}, #{shades[(d[table[n].to_i].shade.to_i - 1)]}"
+      end
     end
     puts message
     puts
     if level == 'e'
-      Hint.generate_hint_easy(table)
+      Hint.generate_hint_easy table
     elsif level == 'm'
-      Hint.generate_hint_medium(table)
+      Hint.generate_hint_medium table
     else
-      Hint.generate_hint_difficult(table)
+      Hint.generate_hint_difficult table
     end
     puts
     true
@@ -89,15 +91,15 @@ module TableSetting
       # Add 3 cards to table and remove from dealer
       3.times do
         val = dealer.sample
-        table.push(val)
-        dealer.delete(val)
+        table.push val
+        dealer.delete val
       end
     end
     # Put additional messages if required.
-    message.push('Extra cards were dealt to ensure presence of at least one set.') if table.length > 12
-    message.push('There are no more cards left to deal.') if dealer.length.zero?
+    message.push 'Extra cards were dealt to ensure presence of at least one set.' if table.length > 12
+    message.push 'There are no more cards left to deal.' if dealer.length.zero?
     # Print out the table and message
-    ret_print = print_table(table, message, level)
+    ret_print = print_table table, message, level
     # For testing, I will return a boolean to check if cards are printed.
     ret_print
   end

@@ -28,9 +28,9 @@ end
 def display_sorted_score(num_players, person_arr)
   player_summary = {}
   (0...num_players).each do |n|
-    player_summary.store(person_arr[n].player_num, person_arr[n].score)
+    player_summary.store person_arr[n].player_num, person_arr[n].score
   end
-  player_summary.store(person_arr[1].cpu_num, person_arr[1].score) if num_players == 1
+  player_summary.store person_arr[1].cpu_num, person_arr[1].score if num_players == 1
   player_summary = player_summary.sort_by { |_k, v| -v }.to_h
   puts 'Leaderboard'
   player_summary.each do |i|
@@ -54,7 +54,7 @@ def pre_game_selection person_arr, num_players
     print 'Invalid number, try again: '
     num_players = gets.chomp.to_i
   end
-  create_array(num_players, person_arr)
+  create_array num_players, person_arr
 
   num_players
 end
@@ -67,29 +67,29 @@ end
 # sel - Integer that reflects game-state.
 #
 # Returns nothing.
-def selection sel, num_players, person_arr
+def selection(sel, num_players, person_arr)
   if sel == 1 # New Round
-    cpu_input(num_players, person_arr) if num_players == 1
-    player_input(num_players, person_arr) if num_players > 1
+    cpu_input num_players, person_arr if num_players == 1
+    player_input num_players, person_arr if num_players > 1
     puts ' '
     puts '#############################################'
     puts 'Out of time! End of round'
     puts '#############################################'
-    display_sorted_score(num_players, person_arr)
+    display_sorted_score num_players, person_arr
   elsif sel == 2 # New Game
     person_arr = []
     print 'Enter number of players (1 for VS computer player): '
     num_players = gets.chomp.to_i
-    num_players = pre_game_selection(person_arr, num_players)
-    cpu_input(num_players, person_arr) if num_players == 1
-    player_input(num_players, person_arr) if num_players > 1
+    num_players = pre_game_selection person_arr, num_players
+    cpu_input num_players, person_arr if num_players == 1
+    player_input num_players, person_arr if num_players > 1
     puts ' '
     puts '#############################################'
     puts 'Out of time! End of round'
     puts '#############################################'
-    display_sorted_score(num_players, person_arr)
+    display_sorted_score num_players, person_arr
   elsif sel == 3
-    exit(0)
+    exit 0
   end
 end
 
@@ -111,18 +111,18 @@ end
 person_arr = []
 print 'Enter number of players (1 for VS computer player): '
 num_players = gets.chomp.to_i
-pre_game_selection(person_arr, num_players)
+pre_game_selection person_arr, num_players
 
-cpu_input(num_players, person_arr) if num_players == 1
-player_input(num_players, person_arr) if num_players > 1
+cpu_input num_players, person_arr if num_players == 1
+player_input num_players, person_arr if num_players > 1
 puts ' '
 puts '#############################################'
 puts 'Out of time! End of round'
 puts '#############################################'
-display_sorted_score(num_players, person_arr)
+display_sorted_score num_players, person_arr
 
 # Edited 05/25/20 by Kevin: replaced While true with loop do
 loop do
   sel = game_menu
-  selection(sel, num_players, person_arr)
+  selection sel, num_players, person_arr
 end

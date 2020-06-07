@@ -43,15 +43,15 @@ end
 #
 # Returns Array holding Card objects, the Deck of Cards for Set Game.
 def cardone
-  num_A = [1, 2, 3] # [1, 2, 3]
-  color_A = [1, 2, 3] # ['red', 'green', 'purple']
-  shade_A = [1, 2, 3] # ['solid', 'striped', 'open']
-  shape_A = [1, 2, 3] # ['squiggle', "diamond', 'oval']
+  num_a = [1, 2, 3] # [1, 2, 3]
+  color_a = [1, 2, 3] # ['red', 'green', 'purple']
+  shade_a = [1, 2, 3] # ['solid', 'striped', 'open']
+  shape_a = [1, 2, 3] # ['squiggle', "diamond', 'oval']
   cards = [] # to be returned
   # loops through all cards
   (0..80).each do |n|
     # % based on when to adjust according to base-3
-    cards[n] = Card.new(num_A[n % 3], color_A[(n / 3) % 3], shade_A[(n / 27) % 3], shape_A[(n / 9) % 3])
+    cards[n] = Card.new(num_a[n % 3], color_a[(n / 3) % 3], shade_a[(n / 27) % 3], shape_a[(n / 9) % 3])
   end
   cards # returned array
 end

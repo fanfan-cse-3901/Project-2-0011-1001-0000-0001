@@ -28,7 +28,7 @@ module Hint
       (0...(table.length - 2)).each do |i|
         ((i + 1)...(table.length - 1)).each do |j|
           ((j + 1)...table.length).each do |k|
-            val += 1 if SetVerify.is_set?([table[i], table[j], table[k]])
+            val += 1 if SetVerify.is_set? [table[i], table[j], table[k]]
           end
         end
       end
@@ -45,6 +45,7 @@ module Hint
   # Returns number of sets consisting a card.
   # Created on 6/1/2020 by Prachiti Garge
   # Edited on 6/5/2020 by Prachiti Garge: Renamed and implemented the easy version
+  # Edited on 6/05/2020 by Kevin Dong: Refactoring and simplifcation
   def self.generate_hint_easy(table)
     d = cardone
     str = 'No cards are present on the table.'
@@ -52,18 +53,15 @@ module Hint
     shapes = %w[diamond squiggle oval]
     colors = %w[red green purple]
     shades = %w[solid striped open]
-    if !table.length.zero?
-      sets = SetVerify.find_set(table)
+    unless table.length.zero?
+      sets = SetVerify.find_set table
       if sets.length.zero?
         str = 'No sets are present on the table.'
-        puts str
       else
-        str = "HINT: Find a card that makes a set with the cards #{numbers[(d[sets[0][0].to_i].num.to_i - 1)]}, #{shapes[(d[sets[0][0].to_i].shape.to_i - 1)]}, #{colors[(d[sets[0][0].to_i].color.to_i - 1)]}, #{shades[(d[sets[0][0].to_i].shade.to_i - 1)]} and #{numbers[(d[sets[0][1].to_i].num.to_i - 1)]}, #{shapes[(d[sets[0][1].to_i].shape.to_i - 1)]}, #{colors[(d[sets[0][1].to_i].color.to_i - 1)]}, #{shades[(d[sets[0][1].to_i].shade.to_i - 1)]}."
-        puts str
+        str = "HINT: Find a card that makes a set with the cards #{numbers[(d[sets[0][0].to_i].num.to_i - 1)]}, #{shapes[(d[sets[0][0].to_i].shape.to_i - 1)]}, #{colors[(d[sets[0][0].to_i].color.to_i - 1)]}, #{shades[(d[sets[0][0].to_i].shade.to_i - 1)]}, and #{numbers[(d[sets[0][1].to_i].num.to_i - 1)]}, #{shapes[(d[sets[0][1].to_i].shape.to_i - 1)]}, #{colors[(d[sets[0][1].to_i].color.to_i - 1)]}, #{shades[(d[sets[0][1].to_i].shade.to_i - 1)]}."
       end
-    else
-       puts str
     end
+    puts str
     str
   end
 
