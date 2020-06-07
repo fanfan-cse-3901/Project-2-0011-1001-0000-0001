@@ -3,6 +3,9 @@
 require_relative './set_verify.rb'
 require_relative './set_setup.rb'
 
+=begin
+Provides additional functionality of generating hints for the three difficulty levels.
+=end
 
 # Provides methods to generate hints.
 # All methods are module methods and should be called on the Hint module.

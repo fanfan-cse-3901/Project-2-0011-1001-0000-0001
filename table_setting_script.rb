@@ -27,7 +27,7 @@ module TableSetting
   # Created on 5/26/2020 by Prachiti Garge
   def self.at_least_one_set?(table)
     val = false
-    unless table.length.zero?
+    unless table.length.zero?git 
       (0...(table.length - 2)).each do |i|
         ((i + 1)...(table.length - 1)).each do |j|
           ((j + 1)...table.length).each do |k|
