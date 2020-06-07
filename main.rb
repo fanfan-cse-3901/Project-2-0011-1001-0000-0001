@@ -104,9 +104,10 @@ end
 # Created 05/25/2020 by Yifan Yao
 # Edited 06/04/2020 by Kevin Dong: Added cpu_input support
 person_arr = []
-print 'Enter number of players (1 for VS computer player): '
+print 'Enter number of players (1 for vs computer player): '
 num_players = gets.chomp.to_i
 pre_game_selection person_arr, num_players
+puts 'Computer player has entered as player 2.' if num_players == 1
 
 cpu_input num_players, person_arr if num_players == 1
 player_input num_players, person_arr if num_players > 1
