@@ -50,6 +50,8 @@ class Player
 end
 
 # Created 06/03/2020 by Kevin Dong
+# This is the class that keeps track of the CPU player and its score.
+# Similar to the player class
 class CPU
   attr_accessor :cpu_num, :score
 
@@ -92,7 +94,6 @@ end
 def player_input(num_players, person_arr)
   table = []
   dealer = (0..80).to_a
-  puts 'DEBUG PURPOSE, DELETE LATER: '
   puts "NUMBER OF PLAYERS IS #{num_players}"
   mode = mode_level
   time = 100
@@ -107,7 +108,7 @@ def player_input(num_players, person_arr)
   # This checks when deck is empty and no set from table
   continue_game = true
   first_time = true
-  # begin the timer
+  # Begin the timer
   begin
     Timeout.timeout time do
       # Continue playing for the round until end game (when time is up)
@@ -137,6 +138,7 @@ def player_input(num_players, person_arr)
             card[i - 1] = gets.to_i - 1
           end
         end
+        # Check if the three cards are a set
         if SetVerify.is_set? [table[card[0]], table[card[1]], table[card[2]]]
           # Output that it is a set and update score
           puts 'It is a set!'

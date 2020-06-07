@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 
+# File Created on 5/26/2020 by Prachiti Garge
+=begin
+This modules contains methods to set up the table correctly.
+Call TableSetting.set_table from this module.
+Methods implemented are set_table, print_table, and at_least_one_set.
+=end
+
 require_relative './set_verify.rb'
 require_relative './set_setup.rb'
 require_relative './hint_generator.rb'
 require_relative './gen_table_img.rb'
 
-# This modules contains methods to set up the table correctly.
-# Call TableSetting.set_table from this module
-# Methods implemented are set_table, print_table, and at_least_one_set
-#
+
 # Created on 5/26/2020 by Prachiti Garge
 # Edited on 5/27/2020 by Prachiti Garge: Deleted others' code copy and instead put commands to access their code directly.
 # Edited on 6/1/2020 by Prachiti Garge: Changed the way deck is accessed according to set_setup new version.

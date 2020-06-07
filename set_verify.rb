@@ -1,17 +1,21 @@
 # frozen_string_literal: true
 
 # File created 05/25/2020 by Kevin Dong
-# Handles the various functions needed for finding and verifying sets.
-# Should be used in table creating, card selection, and cpu functionality.
-#
+=begin
+Handles the various functions needed for finding and verifying sets.
+Should be used in table creating, card selection, and cpu functionality.
+=end
 # File edited 05/27/2020 by Kevin Dong: Logic reworking.
 # File edited 05/31/2020 by Kevin Dong: Style checks, refactoring.
 # File edited 06/01/2020 by Kevin Dong: find_set method TDD.
 require './set_setup.rb'
+
+# Module created 05/25/2020 by Kevin Dong
 # Public: Methods for verifying if 3 cards are able to form a set.
 # is_set? methods should have array of 3 integers passed in.
 # find_set methods should have array of 2 integers passed in.
 module SetVerify
+  # Method created 05/25/2020 by Kevin Dong
   # Public: Dummy method.
   # Outputs "is set".
   def self.set?

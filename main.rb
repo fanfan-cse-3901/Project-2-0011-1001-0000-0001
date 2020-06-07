@@ -49,6 +49,7 @@ end
 # Public: Initialize array of players. Assume at least 2
 #
 # person_arr - Array of Player objects to be populated.
+# num_players - Variable that holds integer value of players.
 #
 # Returns number of players.
 def pre_game_selection person_arr, num_players
@@ -85,6 +86,7 @@ def selection (sel, num_players, person_arr)
   end
 end
 
+# Created 05/25/2020 by Yifan Yao
 # Edited 05/27/2020 by Kevin Dong: Added Documentation
 # Public: Handles end of round/game scenario.
 #
@@ -99,6 +101,7 @@ def game_menu
   sel
 end
 
+# Created 05/25/2020 by Yifan Yao
 # Edited 06/04/2020 by Kevin Dong: Added cpu_input support
 person_arr = []
 print 'Enter number of players (1 for VS computer player): '
@@ -113,6 +116,7 @@ puts 'Out of time! End of round'
 puts '#############################################'
 display_sorted_score num_players, person_arr
 
+# Created 05/25/2020 by Yifan Yao
 # Edited 05/25/20 by Kevin: replaced While true with loop do
 loop do
   sel = game_menu
