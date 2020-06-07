@@ -99,6 +99,7 @@ module TableSetting
         dealer.delete val
       end
     end
+
     # Put additional messages if required.
     message.push 'Extra cards were dealt to ensure presence of at least one set.' if table.length > 12
     message.push 'There are no more cards left to deal.' if dealer.length.zero?

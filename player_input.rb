@@ -84,7 +84,8 @@ end
 # Edited 05/26/2020 by Yifan Yao: replace redundant codes by using a loop, change of implementation notified to all
 # Edited on 06/03/2020 by Kevin Dong: Important implementation to enable functionality again after set_setup changes.
 # Edited on 06/04/2020 by Amanda Cheng: Updated timer so that it automatically terminates code and does not need to wait for user to input anything
-# Edited on 6/5/2020 by Prachiti Garge: Updated call to TableSetting.set_table.
+# Edited on 06/05/2020 by Prachiti Garge: Updated call to TableSetting.set_table.
+# Edited on 06/06/2020 by Prachiti Garge: Deleted print Debugging statement in the final draft.
 # Public: Process for multiplayer game
 #
 # num_players - should be number of players in game
