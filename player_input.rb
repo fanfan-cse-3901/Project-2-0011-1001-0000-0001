@@ -215,11 +215,8 @@ def cpu_input(_num_players, person_arr)
         end
         begin
           Timeout.timeout turn do
-            print 'Press Enter to Call set: '
-            num = gets.chomp
-
-            num_cards_table = table.length
-            puts "Player #{num}: Pick a set of 3 cards. Type the card # between #{1..num_cards_table}"
+          num_cards_table = table.length
+            puts "Player: Pick a set of 3 cards. Type the card # between #{1..num_cards_table}"
             # Now obtain the 3 cards and match it with the cards on Table
             card = [-1, -2, -3]
             (1..3).each do |i|
