@@ -67,22 +67,10 @@ end
 # sel - Integer that reflects game-state.
 #
 # Returns nothing.
-def selection(sel, num_players, person_arr)
-  if sel == 1 # New Round
-    cpu_input num_players, person_arr if num_players == 1
-    player_input num_players, person_arr if num_players > 1
-    puts ' '
-    puts '#############################################'
-    puts 'Out of time! End of round'
-    puts '#############################################'
-    display_sorted_score num_players, person_arr
-  elsif sel == 2 # New Game
-    person_arr = []
-    print 'Enter number of players (1 for VS computer player): '
-    num_players = gets.chomp.to_i
-    num_players = pre_game_selection person_arr, num_players
-    cpu_input num_players, person_arr if num_players == 1
-    player_input num_players, person_arr if num_players > 1
+def selection (sel, num_players, person_arr)
+  if sel == 1 || sel == 2
+    cpu_input(num_players, person_arr) if num_players == 1
+    player_input(num_players, person_arr) if num_players > 1
     puts ' '
     puts '#############################################'
     puts 'Out of time! End of round'
@@ -124,5 +112,11 @@ display_sorted_score num_players, person_arr
 # Edited 05/25/20 by Kevin: replaced While true with loop do
 loop do
   sel = game_menu
+  if sel == 2
+    person_arr = []
+    print 'Enter number of players (1 for VS computer player): '
+    num_players = gets.chomp.to_i
+    num_players = pre_game_selection(person_arr, num_players)
+  end
   selection sel, num_players, person_arr
 end
