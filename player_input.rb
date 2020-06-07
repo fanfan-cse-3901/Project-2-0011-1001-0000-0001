@@ -221,7 +221,7 @@ def cpu_input(_num_players, person_arr)
             num_cards_table = table.length
             puts "Player #{num}: Pick a set of 3 cards. Type the card # between #{1..num_cards_table}"
             # Now obtain the 3 cards and match it with the cards on Table
-            card = g[-1, -2, -3]
+            card = [-1, -2, -3]
             (1..3).each do |i|
               print "Card #{i}: "
               card[i - 1] = gets.to_i - 1
